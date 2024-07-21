@@ -133,62 +133,6 @@ Panorama Reconstruction</b>, which employs 3D Gaussian Splatting for rapid 3D re
 </section>
 <!-- End teaser video -->
 
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            3D scene generation is in high demand across various domains, including virtual reality, gaming, and the film industry. 
-Owing to the powerful generative capabilities of text-to-image diffusion models that provide reliable priors, the creation of 3D scenes using only text prompts has become viable, thereby significantly advancing researches in text-driven 3D scene generation.
-In order to obtain multiple-view supervision from 2D diffusion models,  prevailing methods typically employ the diffusion model to generate an initial local image, followed by iteratively outpainting the local image using diffusion models to gradually generate scenes. Nevertheless, these outpainting-based approaches prone to produce global inconsistent scene generation results without high degree of completeness, restricting their broader applications.
-To tackle these problems, we introduce HoloDreamer, a framework that first generates high-definition panorama as a holistic initialization of the full 3D scene, then leverage 3D Gaussian Splatting (3D-GS) to quickly reconstruct the 3D scene, thereby facilitating the creation of view-consistent and fully enclosed 3D scenes.
-Specifically, we propose Stylized Equirectangular Panorama Generation, a pipeline that combines multiple diffusion models to enable stylized and detailed equirectangular panorama generation from complex text prompts. Subsequently, Enhanced Two-Stage Panorama Reconstruction is introduced, conducting a two-stage optimization of 3D-GS to inpaint the missing region and enhance the integrity of the scene. Comprehensive experiments demonstrated that our method outperforms prior works in terms of overall visual consistency and harmony as well as reconstruction quality and rendering robustness when
-generating fully enclosed scenes.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-
-<!-- Image carousel -->
-<section class="section hero">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <!-- 标题 -->
-        <h2 class="title is-3">Method</h2>
-        
-        <!-- 图片1 -->
-          <img src="static/images/generation_pipe.png" alt="First Image">
-          <h2 class="subtitle has-text-centered">
-            Overview of our Stylized Equirectangular Panorama Generation. Given a user prompt, multiple diffusion models are used to generate stylized high-quality panoramas. Additionally the circular blending technique is applied to avoid cracks when rotating the panorama.
-          </h2>
-        </div>
-    </div>
-  </div>
-        
-        
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-       <div class="column is-full">
-        <!-- 图片2 -->
-            <img src="static/images/reconstruction_pipe.png" alt="Second Image">
-          <h2 class="subtitle has-text-centered">
-            Overview of our Enhanced Two-Stage Panorama Reconstruction. We perform depth estimation on the generated panorama and then project RGBD data to obtain the point cloud. Two types of cameras --- base cameras and supplementary cameras --- for projection and rendering in different scenarios, and prepare three image sets for supervision at different stages of 3D-GS optimization. 
-            The rendering images of the reconstructed scene from Pre Optimization stage are inpainted for optimization in Transfer Optimization stage, resulting in the final reconstructed scene.
-          </h2>
-        </div>
-    </div>
-  </div>
-</section>
-<!-- End image carousel <div style="height: 30px;"></div> -->
-
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
@@ -476,6 +420,65 @@ generating fully enclosed scenes.
     });
 </script>
 
+<!-- Paper abstract -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D scene generation is in high demand across various domains, including virtual reality, gaming, and the film industry. 
+Owing to the powerful generative capabilities of text-to-image diffusion models that provide reliable priors, the creation of 3D scenes using only text prompts has become viable, thereby significantly advancing researches in text-driven 3D scene generation.
+In order to obtain multiple-view supervision from 2D diffusion models,  prevailing methods typically employ the diffusion model to generate an initial local image, followed by iteratively outpainting the local image using diffusion models to gradually generate scenes. Nevertheless, these outpainting-based approaches prone to produce global inconsistent scene generation results without high degree of completeness, restricting their broader applications.
+To tackle these problems, we introduce <b>HoloDreamer</b>, a framework that first generates high-definition panorama as a holistic initialization of the full 3D scene, then leverage 3D Gaussian Splatting (3D-GS) to quickly reconstruct the 3D scene, thereby facilitating the creation of view-consistent and fully enclosed 3D scenes.
+Specifically, we propose <b>Stylized Equirectangular Panorama Generation</b>, a pipeline that combines multiple diffusion models to enable stylized and detailed equirectangular panorama generation from complex text prompts. Subsequently, <b>Enhanced Two-Stage Panorama Reconstruction</b> is introduced, conducting a two-stage optimization of 3D-GS to inpaint the missing region and enhance the integrity of the scene. Comprehensive experiments demonstrated that our method outperforms prior works in terms of overall visual consistency and harmony as well as reconstruction quality and rendering robustness when
+generating fully enclosed scenes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Image carousel -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- 标题 -->
+        <h2 class="title is-3">Method</h2>
+        
+        <!-- 图片1 -->
+          <img src="static/images/generation_pipe.png" alt="First Image">
+          <div class="content has-text-justified">
+          <p>
+            Overview of our Stylized Equirectangular Panorama Generation. Given a user prompt, multiple diffusion models are used to generate stylized high-quality panoramas. Additionally the circular blending technique is applied to avoid cracks when rotating the panorama.
+          </p>
+        </div>
+        </div>
+    </div>
+  </div>
+    <div style="height: 30px;"></div>
+        
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+       <div class="column is-full">
+        <!-- 图片2 -->
+            <img src="static/images/reconstruction_pipe.png" alt="Second Image">
+          <div class="content has-text-justified">
+          <p>
+            Overview of our Enhanced Two-Stage Panorama Reconstruction. We perform depth estimation on the generated panorama and then project RGBD data to obtain the point cloud. Two types of cameras --- base cameras and supplementary cameras --- for projection and rendering in different scenarios, and prepare three image sets for supervision at different stages of 3D-GS optimization. 
+            The rendering images of the reconstructed scene from Pre Optimization stage are inpainted for optimization in Transfer Optimization stage, resulting in the final reconstructed scene.
+          </p>
+        </div>
+        </div>
+    </div>
+  </div>
+</section>
+<!-- End image carousel -->
 
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
