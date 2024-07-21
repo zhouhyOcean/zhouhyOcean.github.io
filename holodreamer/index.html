@@ -450,18 +450,19 @@ generating fully enclosed scenes.
       <div class="column is-four-fifths">
         <!-- 标题 -->
         <h2 class="title is-3">Method</h2>
+        <div style="height: 30px;"></div>
         
         <!-- 图片1 -->
           <img src="static/images/generation_pipe.png" alt="First Image">
           <div class="content has-text-justified">
           <p>
-            Overview of our Stylized Equirectangular Panorama Generation. Given a user prompt, multiple diffusion models are used to generate stylized high-quality panoramas. Additionally the circular blending technique is applied to avoid cracks when rotating the panorama.
+            Overview of our <b>Stylized Equirectangular Panorama Generation</b>. Given a user prompt, multiple diffusion models are used to generate stylized high-quality panoramas. Additionally the circular blending technique is applied to avoid cracks when rotating the panorama.
           </p>
         </div>
         </div>
     </div>
   </div>
-    <div style="height: 30px;"></div>
+    <div style="height: 50px;"></div>
         
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
@@ -470,7 +471,7 @@ generating fully enclosed scenes.
             <img src="static/images/reconstruction_pipe.png" alt="Second Image">
           <div class="content has-text-justified">
           <p>
-            Overview of our Enhanced Two-Stage Panorama Reconstruction. We perform depth estimation on the generated panorama and then project RGBD data to obtain the point cloud. Two types of cameras --- base cameras and supplementary cameras --- for projection and rendering in different scenarios, and prepare three image sets for supervision at different stages of 3D-GS optimization. 
+            Overview of our <b>Enhanced Two-Stage Panorama Reconstruction</b>. We perform depth estimation on the generated panorama and then project RGBD data to obtain the point cloud. Two types of cameras --- base cameras and supplementary cameras --- for projection and rendering in different scenarios, and prepare three image sets for supervision at different stages of 3D-GS optimization. 
             The rendering images of the reconstructed scene from Pre Optimization stage are inpainted for optimization in Transfer Optimization stage, resulting in the final reconstructed scene.
           </p>
         </div>
