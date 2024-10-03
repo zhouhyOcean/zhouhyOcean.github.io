@@ -3,34 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drag and Drop Video Player</title>
+    <title>Drag and Drop Video Player with VR</title>
     <style>
         #drop-area {
-            width: 50%; /* 设置为页面宽度的50% */
+            width: 60%; /* 窄一些的拖拽区域 */
             height: 200px;
             border: 2px dashed #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px auto; /* 将区域居中 */
+            margin: 20px auto; /* 居中显示 */
             cursor: pointer;
             color: #666;
-            padding: 20px; /* 增加内边距 */
-            font-size: 16px; /* 增加字体大小 */
-            border-radius: 10px; /* 增加圆角边框 */
-            text-align: center; /* 文本居中 */
+            padding: 20px;
+            font-size: 16px;
+            border-radius: 10px;
+            text-align: center;
         }
         #drop-area.dragover {
             border-color: #000;
         }
-        .video {
-            max-width: 600px; /* 设置视频播放器的最大宽度 */
-            margin: 20px auto; /* 将视频播放器居中 */
-            display: block; /* 确保视频播放器可见 */
+        .video-container {
+            max-width: 600px;
+            margin: 20px auto;
         }
         video {
             width: 100%;
             height: auto;
+        }
+        #vr-root {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 24px;
         }
     </style>
 </head>
@@ -40,8 +59,15 @@
     <p>Drag and drop a video file here</p>
 </div>
 
-<div class="video">
-    <video id="videoPlayer" playsinline autoplay loop muted>
+<div class="video-container">
+    <video id="videoPlayer" controls>
+        <source src="" type="video/mp4">
+    </video>
+</div>
+
+<div id="vr-root">
+    <div class="close-btn">&times;</div>
+    <video id="vr-video" loop playsinline muted autoplay>
         <source src="" type="video/mp4">
     </video>
 </div>
@@ -50,6 +76,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const dropArea = document.getElementById('drop-area');
     const videoPlayer = document.getElementById('videoPlayer');
+    const vrRoot = document.getElementById('vr-root');
+    const vrVideo = document.getElementById('vr-video');
+    const closeButton = vrRoot.querySelector('.close-btn');
 
     // 处理拖拽进入事件
     dropArea.addEventListener('dragover', function(e) {
@@ -85,6 +114,31 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Please upload a valid video file.');
         }
     }
+
+    // 打开VR视图
+    function openVr(src) {
+        vrRoot.style.display = 'flex';
+        vrVideo.querySelector('source').setAttribute('src', src);
+        vrVideo.load();
+        vrVideo.play();
+    }
+
+    // 关闭VR视图
+    function closeVr() {
+        vrRoot.style.display = 'none';
+        vrVideo.pause();
+        vrVideo.querySelector('source').setAttribute('src', '');
+    }
+
+    closeButton.addEventListener('click', closeVr);
+
+    // 监听视频播放元素的点击事件，打开VR视图
+    videoPlayer.addEventListener('click', function() {
+        const src = videoPlayer.querySelector('source').getAttribute('src');
+        if (src) {
+            openVr(src);
+        }
+    });
 });
 </script>
 </body>
