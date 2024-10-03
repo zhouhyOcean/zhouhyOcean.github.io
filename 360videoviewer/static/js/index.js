@@ -1,11 +1,11 @@
+<script>
 document.addEventListener('DOMContentLoaded', function() {
+    const dropArea = document.getElementById('drop-area');
     const videoContainer = document.getElementById('video-container');
     const video = document.getElementById('vr-video');
     const closeButton = document.getElementsByClassName('close-btn')[0];
 
-    // 假设你有一个文件拖放区域
-    const dropArea = document.getElementById('drop-area');
-    
+    // 处理拖拽事件
     dropArea.addEventListener('dragover', function(e) {
         e.preventDefault();
         dropArea.classList.add('dragover');
@@ -46,3 +46,4 @@ document.addEventListener('DOMContentLoaded', function() {
         URL.revokeObjectURL(video.src); // Release the object URL
     });
 });
+</script>
