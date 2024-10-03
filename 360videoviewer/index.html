@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inline VR Video Player</title>
     <style>
+        #drop-area {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            cursor: pointer;
+        }
+        #drop-area.dragover {
+            border-color: #000;
+        }
         #video-container {
             display: none;
             position: fixed;
@@ -26,10 +39,16 @@
             top: 10px;
             right: 10px;
             cursor: pointer;
+            color: #fff;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
+
+<div id="drop-area">
+    <p>Drag and drop a VR video file here</p>
+</div>
 
 <div id="video-container">
     <video id="vr-video" controls autoplay loop muted>
@@ -38,6 +57,8 @@
     <div class="close-btn">&times;</div>
 </div>
 
-<script src="script.js"></script>
+<script>
+// JavaScript代码将放在这里
+</script>
 </body>
 </html>
