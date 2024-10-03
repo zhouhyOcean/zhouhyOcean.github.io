@@ -1,6 +1,6 @@
 <div class="video">
     <video playsinline autoplay loop muted>
-        <source data-src="./static/videos/03.mp4" data-vrsrc="URL.createObjectURL(file)" type="video/mp4">
+        <source data-src="./static/videos/03.mp4" data-vrsrc="./static/videos/lyriel-1.mp4" type="video/mp4">
     </video>
 </div>
 
@@ -11,7 +11,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drag and Drop Video Player with VR</title>
     <style>
-        /* ... 省略其他样式 ... */
+        #drop-area {
+            width: 60%;
+            height: 200px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            cursor: pointer;
+            color: #666;
+            padding: 20px;
+            font-size: 16px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        #drop-area.dragover {
+            border-color: #000;
+        }
+        .video-container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        #vr-root {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 24px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -45,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const vrRoot = document.getElementById('vr-root');
     const closeButton = document.querySelector('.close-btn');
     const vrVideo = document.getElementById('vr-video');
+    let videoSrc = null;
 
     // 处理拖拽进入事件
     dropArea.addEventListener('dragover', function(e) {
@@ -72,12 +122,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleFiles(files) {
         const file = files[0];
         if (file.type.startsWith('video/')) {
-            const src = URL.createObjectURL(file);
-            videoPlayer.querySelector('source').setAttribute('src', src);
+            videoSrc = URL.createObjectURL(file);
+            videoPlayer.querySelector('source').setAttribute('src', videoSrc);
             videoPlayer.load();
             videoPlayer.play();
-            // 设置VR视频源
-            vrVideo.setAttribute('src', src);
         } else {
             alert('Please upload a valid video file.');
         }
@@ -85,8 +133,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 打开VR视图
     function openVr() {
-        vrRoot.style.display = 'flex';
-        vrVideo.play();
+        if (videoSrc) {
+            vrVideo.setAttribute('src', videoSrc);
+            vrRoot.style.display = 'flex';
+            vrVideo.play();
+        }
     }
 
     // 关闭VR视图
