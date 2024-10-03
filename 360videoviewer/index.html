@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inline VR Video Player</title>
+    <title>Drag and Drop Video Player</title>
     <style>
         #drop-area {
             width: 100%;
@@ -14,51 +14,74 @@
             justify-content: center;
             margin: 20px;
             cursor: pointer;
+            color: #666;
         }
         #drop-area.dragover {
             border-color: #000;
         }
-        #video-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
+        .video {
+            max-width: 600px; /* Set a maximum width for the video player */
+            margin: 20px auto;
+            display: block; /* Ensure the video player is visible */
         }
         video {
-            max-width: 100%;
-            max-height: 100%;
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            color: #fff;
-            font-size: 24px;
+            width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
 
 <div id="drop-area">
-    <p>Drag and drop a VR video file here</p>
+    <p>Drag and drop a video file here</p>
 </div>
 
-<div id="video-container">
-    <video id="vr-video" controls autoplay loop muted>
-        <!-- Video source will be set here -->
+<div class="video">
+    <video id="videoPlayer" playsinline autoplay loop muted>
+        <source src="" type="video/mp4">
     </video>
-    <div class="close-btn">&times;</div>
 </div>
 
 <script>
-// JavaScript代码将放在这里
+document.addEventListener('DOMContentLoaded', function() {
+    const dropArea = document.getElementById('drop-area');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    // 处理拖拽进入事件
+    dropArea.addEventListener('dragover', function(e) {
+        e.preventDefault(); // 阻止默认行为
+        dropArea.classList.add('dragover');
+    });
+
+    // 处理拖拽离开事件
+    dropArea.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        dropArea.classList.remove('dragover');
+    });
+
+    // 处理文件放下（drop）事件
+    dropArea.addEventListener('drop', function(e) {
+        e.preventDefault(); // 阻止默认行为
+        dropArea.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFiles(files);
+        }
+    });
+
+    // 处理文件选择
+    function handleFiles(files) {
+        const file = files[0];
+        if (file.type.startsWith('video/')) {
+            const src = URL.createObjectURL(file);
+            videoPlayer.querySelector('source').setAttribute('src', src);
+            videoPlayer.load(); // 重新加载视频元素以更新源
+            videoPlayer.play(); // 开始播放视频
+        } else {
+            alert('Please upload a valid video file.');
+        }
+    }
+});
 </script>
 </body>
 </html>
