@@ -1,4 +1,3 @@
-<script>
 document.addEventListener('DOMContentLoaded', function() {
     const dropArea = document.getElementById('drop-area');
     const videoPlayer = document.getElementById('videoPlayer');
@@ -67,4 +66,3 @@ document.addEventListener('DOMContentLoaded', function() {
         openVr();
     });
 });
-</script>
