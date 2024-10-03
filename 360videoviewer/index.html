@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drag and Drop Video Player with VR</title>
+    <script src="./static/js/aframe.min.js" defer></script> <!-- 注意defer属性 -->
     <style>
         #drop-area {
             width: 60%;
@@ -80,7 +81,6 @@
     </a-scene>
 </div>
 
-<script src="./static/js/aframe.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const dropArea = document.getElementById('drop-area');
@@ -88,7 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const vrRoot = document.getElementById('vr-root');
     const closeButton = document.querySelector('.close-btn');
     const vrVideo = document.getElementById('vr-video');
-    let vrSrc = '';
+
+    let vrSrc = ''; // 存储VR视频源
 
     // 处理拖拽进入事件
     dropArea.addEventListener('dragover', function(e) {
@@ -121,6 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
             videoPlayer.load();
             videoPlayer.play();
             vrSrc = src; // 保存VR视频源
+            const videoTag = videoPlayer.querySelector('video');
+            videoTag.setAttribute('data-vrsrc', src); // 设置data-vrsrc属性
         } else {
             alert('Please upload a valid video file.');
         }
