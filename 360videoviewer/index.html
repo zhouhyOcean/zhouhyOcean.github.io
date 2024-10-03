@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="./static/css/index.css" rel="stylesheet" />
-
-    <script src="./static/js/aframe.min.js" defer></script>
     <title>Drag and Drop Video Player with VR</title>
     <style>
         #drop-area {
@@ -54,10 +50,10 @@
             cursor: pointer;
             color: #fff;
             font-size: 24px;
-            z-index: 1001; /* 确保按钮在最顶层 */
-            background: rgba(255, 255, 255, 0.5); /* 增加背景以便看到 */
-            padding: 10px; /* 增加padding以便点击 */
-            border-radius: 50%; /* 圆形按钮 */
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -75,9 +71,13 @@
 
 <div id="vr-root">
     <div class="close-btn">&times;</div>
-    <video id="vr-video" loop playsinline muted autoplay>
-        <source src="" type="video/mp4">
-    </video>
+    <a-scene>
+        <a-assets>
+            <video id="vr-video" loop playsinline muted autoplay src="your-video-source.mp4"></video>
+        </a-assets>
+        <a-videosphere src="#vr-video"></a-videosphere>
+        <a-entity id="vr-button" vr-mode-ui></a-entity>
+    </a-scene>
 </div>
 
 <script>
