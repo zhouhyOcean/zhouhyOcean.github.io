@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const vrRoot = document.getElementById('vr-root');
     const closeButton = document.querySelector('.close-btn');
     const vrVideo = document.getElementById('vr-video');
-    let videoSrc = null;
+    let vrSrc = '';
 
     // 处理拖拽进入事件
     dropArea.addEventListener('dragover', function(e) {
@@ -122,10 +122,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleFiles(files) {
         const file = files[0];
         if (file.type.startsWith('video/')) {
-            videoSrc = URL.createObjectURL(file);
-            videoPlayer.querySelector('source').setAttribute('src', videoSrc);
+            const src = URL.createObjectURL(file);
+            videoPlayer.querySelector('source').setAttribute('src', src);
             videoPlayer.load();
             videoPlayer.play();
+            vrSrc = src; // 保存VR视频源
         } else {
             alert('Please upload a valid video file.');
         }
@@ -133,8 +134,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 打开VR视图
     function openVr() {
-        if (videoSrc) {
-            vrVideo.setAttribute('src', videoSrc);
+        if (vrSrc) {
+            vrVideo.setAttribute('src', vrSrc);
             vrRoot.style.display = 'flex';
             vrVideo.play();
         }
