@@ -73,13 +73,14 @@
     <div class="close-btn">&times;</div>
     <a-scene>
         <a-assets>
-            <video id="vr-video" loop playsinline muted autoplay src="your-video-source.mp4"></video>
+            <video id="vr-video" loop playsinline muted autoplay crossorigin="anonymous"></video>
         </a-assets>
-        <a-videosphere src="#vr-video"></a-videosphere>
+        <a-videosphere src="#vr-video" rotation="0 -15 0"></a-videosphere>
         <a-entity id="vr-button" vr-mode-ui></a-entity>
     </a-scene>
 </div>
 
+<script src="./static/js/aframe.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const dropArea = document.getElementById('drop-area');
@@ -118,16 +119,16 @@ document.addEventListener('DOMContentLoaded', function() {
             videoPlayer.querySelector('source').setAttribute('src', src);
             videoPlayer.load();
             videoPlayer.play();
+            // 设置VR视频源
+            vrVideo.setAttribute('src', src);
         } else {
             alert('Please upload a valid video file.');
         }
     }
 
     // 打开VR视图
-    function openVr(src) {
+    function openVr() {
         vrRoot.style.display = 'flex';
-        vrVideo.querySelector('source').setAttribute('src', src);
-        vrVideo.load();
         vrVideo.play();
     }
 
@@ -135,17 +136,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeVr() {
         vrRoot.style.display = 'none';
         vrVideo.pause();
-        vrVideo.querySelector('source').setAttribute('src', '');
+        vrVideo.setAttribute('src', '');
     }
 
     closeButton.addEventListener('click', closeVr);
 
     // 监听视频播放元素的点击事件，打开VR视图
     videoPlayer.addEventListener('click', function() {
-        const src = videoPlayer.querySelector('source').getAttribute('src');
-        if (src) {
-            openVr(src);
-        }
+        openVr();
     });
 });
 </script>
