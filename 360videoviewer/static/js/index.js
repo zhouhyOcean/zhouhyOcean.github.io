@@ -1,19 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const dropArea = document.getElementById('drop-area');
-    const vrRoot = document.getElementById('vr-root');
+    const videoContainer = document.getElementById('video-container');
+    const video = document.getElementById('vr-video');
+    const closeButton = document.getElementsByClassName('close-btn')[0];
 
-    // 处理拖拽事件
-    dropArea.addEventListener('dragover', (e) => {
+    // 假设你有一个文件拖放区域
+    const dropArea = document.getElementById('drop-area');
+    
+    dropArea.addEventListener('dragover', function(e) {
         e.preventDefault();
         dropArea.classList.add('dragover');
     });
 
-    dropArea.addEventListener('dragleave', (e) => {
+    dropArea.addEventListener('dragleave', function(e) {
         e.preventDefault();
         dropArea.classList.remove('dragover');
     });
 
-    dropArea.addEventListener('drop', (e) => {
+    dropArea.addEventListener('drop', function(e) {
         e.preventDefault();
         dropArea.classList.remove('dragover');
         const files = e.dataTransfer.files;
@@ -25,40 +28,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const file = files[0];
             if (file.type.startsWith('video/')) {
                 const src = URL.createObjectURL(file);
-                openVr(src);
+                video.src = src;
+                openVideo();
             } else {
-                alert('Please upload a valid VR video file.');
+                alert('Please upload a valid video file.');
             }
         }
     }
 
-    function openVr(src) {
-        vrRoot.innerHTML = `
-            <div class="vr-container">
-                <a-scene vr-mode-ui="enabled: false" embedded>
-                    <a-assets>
-                        <video id="vr-video" loop playsinline muted autoplay src="${src}"></video>
-                    </a-assets>
-                    <a-videosphere src="#vr-video"></a-videosphere>
-                </a-scene>
-            </div>
-        `;
-        vrRoot.style.display = 'block';
-
-        const closeBtn = document.createElement("div");
-        closeBtn.ariaLabel = "close-vr";
-        closeBtn.classList.add("close-btn");
-        closeBtn.innerHTML = `
-            <svg t="1707812514995" class="icon" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
-                <path d="M513.344 0a512 512 0 1 0 0 1024 512 512 0 0 0 0-1024z m226.048 674.624l-54.528 56.896-171.52-164.928-171.392 164.928-54.592-56.896L456.576 512 287.36 349.312l54.592-56.768 171.392 164.8 171.52-164.8 54.528 56.768L570.176 512l169.216 162.624z" fill="#ffffff"></path>
-            </svg>
-        `;
-        closeBtn.addEventListener("click", closeVr);
-        vrRoot.append(closeBtn);
+    function openVideo() {
+        videoContainer.style.display = 'flex';
     }
 
-    function closeVr() {
-        vrRoot.style.display = 'none';
-        vrRoot.innerHTML = '';
-    }
+    closeButton.addEventListener('click', function() {
+        videoContainer.style.display = 'none';
+        video.src = ''; // Clear the video source
+        URL.revokeObjectURL(video.src); // Release the object URL
+    });
 });
