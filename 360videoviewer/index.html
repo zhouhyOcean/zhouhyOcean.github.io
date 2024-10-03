@@ -6,23 +6,27 @@
     <title>Drag and Drop Video Player</title>
     <style>
         #drop-area {
-            width: 100%;
+            width: 50%; /* 设置为页面宽度的50% */
             height: 200px;
             border: 2px dashed #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px;
+            margin: 20px auto; /* 将区域居中 */
             cursor: pointer;
             color: #666;
+            padding: 20px; /* 增加内边距 */
+            font-size: 16px; /* 增加字体大小 */
+            border-radius: 10px; /* 增加圆角边框 */
+            text-align: center; /* 文本居中 */
         }
         #drop-area.dragover {
             border-color: #000;
         }
         .video {
-            max-width: 600px; /* Set a maximum width for the video player */
-            margin: 20px auto;
-            display: block; /* Ensure the video player is visible */
+            max-width: 600px; /* 设置视频播放器的最大宽度 */
+            margin: 20px auto; /* 将视频播放器居中 */
+            display: block; /* 确保视频播放器可见 */
         }
         video {
             width: 100%;
