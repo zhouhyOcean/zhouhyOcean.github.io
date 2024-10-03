@@ -6,13 +6,13 @@
     <title>Drag and Drop Video Player with VR</title>
     <style>
         #drop-area {
-            width: 60%; /* 窄一些的拖拽区域 */
+            width: 60%;
             height: 200px;
             border: 2px dashed #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px auto; /* 居中显示 */
+            margin: 20px auto;
             cursor: pointer;
             color: #666;
             padding: 20px;
@@ -45,11 +45,15 @@
         }
         .close-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 20px;
+            right: 20px;
             cursor: pointer;
             color: #fff;
             font-size: 24px;
+            z-index: 1001; /* 确保按钮在最顶层 */
+            background: rgba(255, 255, 255, 0.5); /* 增加背景以便看到 */
+            padding: 10px; /* 增加padding以便点击 */
+            border-radius: 50%; /* 圆形按钮 */
         }
     </style>
 </head>
@@ -77,12 +81,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropArea = document.getElementById('drop-area');
     const videoPlayer = document.getElementById('videoPlayer');
     const vrRoot = document.getElementById('vr-root');
+    const closeButton = document.querySelector('.close-btn');
     const vrVideo = document.getElementById('vr-video');
-    const closeButton = vrRoot.querySelector('.close-btn');
 
     // 处理拖拽进入事件
     dropArea.addEventListener('dragover', function(e) {
-        e.preventDefault(); // 阻止默认行为
+        e.preventDefault();
         dropArea.classList.add('dragover');
     });
 
@@ -94,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 处理文件放下（drop）事件
     dropArea.addEventListener('drop', function(e) {
-        e.preventDefault(); // 阻止默认行为
+        e.preventDefault();
         dropArea.classList.remove('dragover');
         const files = e.dataTransfer.files;
         if (files.length > 0) {
@@ -108,8 +112,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (file.type.startsWith('video/')) {
             const src = URL.createObjectURL(file);
             videoPlayer.querySelector('source').setAttribute('src', src);
-            videoPlayer.load(); // 重新加载视频元素以更新源
-            videoPlayer.play(); // 开始播放视频
+            videoPlayer.load();
+            videoPlayer.play();
         } else {
             alert('Please upload a valid video file.');
         }
