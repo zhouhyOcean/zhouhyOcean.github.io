@@ -3,14 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VR Video Upload and Viewer</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Inline VR Video Player</title>
+    <style>
+        #video-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        video {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <div id="drop-area">
-        <p>Drag and drop a VR video file here</p>
-    </div>
-    <div id="vr-root" style="display: none;"></div>
-    <script src="script.js"></script>
+
+<div id="video-container">
+    <video id="vr-video" controls autoplay loop muted>
+        <!-- Video source will be set here -->
+    </video>
+    <div class="close-btn">&times;</div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
