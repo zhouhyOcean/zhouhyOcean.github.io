@@ -343,9 +343,9 @@
                     <b>Abstract</b>
                 </h1>
                 <div class="content has-text-justified">
-                    <p style="font-size: 18px; line-height: 1.6; padding-bottom: 20px;">
+                    <p style="font-size: 18px; line-height: 1.6; text-align: justify;">
                         The rapid advancement of diffusion models holds the promise of revolutionizing the application of VR and AR technologies, which typically require scene-level 4D assets for user experience. 
-                        Nonetheless, existing diffusion models predominantly concentrate on modeling static 3D scenes or object-level dynamics, constraining their capacity to provide truly immersive experiences. % background
+                        Nonetheless, existing diffusion models predominantly concentrate on modeling static 3D scenes or object-level dynamics, constraining their capacity to provide truly immersive experiences. background
                         To address this issue, we propose <b>HoloTime</b>, a framework that integrates video diffusion models to generate panoramic videos from a single prompt or reference image, along with a 360-degree 4D scene reconstruction method that seamlessly transforms the generated panoramic video into 4D assets, enabling a fully immersive 4D experience for users.
                         Specifically, to tame video diffusion models for generating high-fidelity panoramic videos, we introduce the <b>360World dataset</b>, the first comprehensive collection of panoramic videos suitable for downstream 4D scene reconstruction tasks.
                         With this curated dataset, we propose <b>Panoramic Animator</b>, a two-stage image-to-video diffusion model that can convert panoramic images into high-quality panoramic videos. Following this, we present <b>Panoramic Space-Time Reconstruction</b>, which leverages a space-time depth estimation method to transform the generated panoramic videos into 4D point clouds, enabling the optimization of a holistic 4D Gaussian Splatting representation to reconstruct spatially and temporally consistent 4D scenes.
