@@ -20,6 +20,15 @@
     <link rel="stylesheet" href="static/css/index.min.css">
     <link rel="stylesheet" href="static/css/index.BuZtXXU3.css">
     <script defer src="static/js/index.min.js"></script>
+    <script type="module">
+            document.querySelector("[data-scroll-to-citation]")?.addEventListener("click", e => {
+                e.preventDefault(),
+                document.querySelector("#citation")?.scrollIntoView({
+                    behavior: "smooth"
+                })
+            }
+            );
+        </script>
     
 </head>
 
