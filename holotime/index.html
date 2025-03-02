@@ -36,50 +36,46 @@
 <body>
 
 
-        <div class="video-background" style="margin-bottom: 0px; padding-bottom: 0px;">
-            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-                <source src="vis/test_12_loop.mp4" type="video/mp4">
-            </video>
-            <div class="video-overlay"></div>
-            <div class="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 space-y-6">
-                <h1 class="font-medium" style="font-family: Arial, sans-serif; font-weight: bold; text-shadow: 2px 2px 4px #000000; color: #FFFFFF; font-size: 5em;">HoloTime</h1>
-                <p class="text-xl md:text-2xl text-center">Taming Video Diffusion Models for Panoramic 4D Scene Generation</p>
-                <div class="text-center space-y-4">
-                    <div class="flex flex-wrap justify-center gap-x-2 text-lg">
-                        <span class="font-medium">
-                            Haiyang Zhou<sup>1 *</sup>,
-                        </span>
-                        <span class="font-medium">
-                            Wangbo Yu<sup>1,2 *</sup>
-                        </span>
-                        <span class="font-medium">
-                            Jiawen Guan<sup>3</sup>,
-                        </span>
-                        <span class="font-medium">
-                            Xinhua Cheng<sup>1</sup>,
-                        </span>
-                        <span class="font-medium">
-                            Yonghong Tian<sup>1,2 †</sup>,
-                        </span>
-                        <span class="font-medium">
-                            Li Yuan<sup>1,2 †</sup>
-                        </span>
-                    </div>
-                    <div class="text-sm space-y-1"><sup>1</sup> Peking University&nbsp;&nbsp;&nbsp;<sup>2</sup> Peng Cheng Laboratory&nbsp;&nbsp;&nbsp;<sup>3</sup> Harbin Institute of Technology
-</div>
-                    <div class="text-sm space-y-1">(* Equal Contribution, † Corresponding Author)
-</div>
+    <div class="relative w-full h-[70vh] overflow-hidden">
+        <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover" src="vis/test_12_loop.mp4"></video>
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 space-y-6">
+            <h1 class="font-medium" style="font-family: Arial, sans-serif; font-weight: bold; text-shadow: 2px 2px 4px #000000; color: #FFFFFF; font-size: 5em;">HoloTime</h1>
+            <p class="text-xl md:text-2xl text-center">Taming Video Diffusion Models for Panoramic 4D Scene Generation</p>
+            <div class="text-center space-y-4">
+                <div class="flex flex-wrap justify-center gap-x-2 text-lg">
+                    <span class="font-medium">
+                        Haiyang Zhou<sup>1 *</sup>,
+                    </span>
+                    <span class="font-medium">
+                        Wangbo Yu<sup>1,2 *</sup>
+                    </span>
+                    <span class="font-medium">
+                        Jiawen Guan<sup>3</sup>,
+                    </span>
+                    <span class="font-medium">
+                        Xinhua Cheng<sup>1</sup>,
+                    </span>
+                    <span class="font-medium">
+                        Yonghong Tian<sup>1,2 †</sup>,
+                    </span>
+                    <span class="font-medium">
+                        Li Yuan<sup>1,2 †</sup>
+                    </span>
                 </div>
-                <div class="flex flex-wrap justify-center gap-4 mt-8">
-                    <a href="https://arxiv.org/abs/2412.11100" target="_blank" class="inline-flex items-center px-4 py-2 border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 border-transparent text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
-                        </svg>
-                        Paper
-
-                    </a>
-                </div>
+                <div class="text-sm space-y-1"><sup>1</sup> Peking University&nbsp;&nbsp;&nbsp;<sup>2</sup> Peng Cheng Laboratory&nbsp;&nbsp;&nbsp;<sup>3</sup> Harbin Institute of Technology</div>
+                <div class="text-sm space-y-1">(* Equal Contribution, † Corresponding Author)</div>
             </div>
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <a href="https://arxiv.org/abs/2412.11100" target="_blank" class="inline-flex items-center px-4 py-2 border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 border-transparent text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                    </svg>
+                    Paper
+
+                </a>
+            </div>
+        </div>
                 <!-- <div class="absolute bottom-4 right-4 z-10 text-white bg-black bg-opacity-50 px-4 py-2 rounded-md text-sm">It may take few moments to load the videos, please wait patiently :)</div>-->
     </div>
 
