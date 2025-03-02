@@ -278,7 +278,7 @@
             </div>
             <div class="row justify-content-center mb-3">
                 <div class="col-12">
-                    <h2><span class="racing-sans-one-regular" style="font-weight: bold; text-shadow: 2px 2px 4px #000000; color: #e782dd;">
+                    <h2><span class="racing-sans-one-regular" style="font-weight: bold; font-size: 2em;">
                       <b>HoloTime</b>
                   </span>: Taming Video Diffusion <br/> Models for Panoramic 4D Scene Generation</h2>
                 </div>
@@ -337,33 +337,24 @@
 
     <div class="desktop-content">
       <div class="container-fluid px-5" id="main">
-        <!-- 第一部分：Abstract -->
         <div class="row py-5 align-items-center justify-content-center" id="abstract">
             <div class="col-12 col-md-6">
                 <h1 class="text-center pb-5 text-bold">
                     <b>Abstract</b>
                 </h1>
-                <p class="text-justify px-5">
-                    <h3 style="font-size: 18px; font-weight: normal;">
+                <div class="content has-text-justified">
+                    <p style="font-size: 18px; line-height: 1.6; padding-bottom: 20px;">
                         The rapid advancement of diffusion models holds the promise of revolutionizing the application of VR and AR technologies, which typically require scene-level 4D assets for user experience. 
                         Nonetheless, existing diffusion models predominantly concentrate on modeling static 3D scenes or object-level dynamics, constraining their capacity to provide truly immersive experiences. % background
-                        To address this issue, we propose <span style="color: #e782dd;"><b>HoloTime</b></span>, a framework that integrates video diffusion models to generate panoramic videos from a single prompt or reference image, along with a 360-degree 4D scene reconstruction method that seamlessly transforms the generated panoramic video into 4D assets, enabling a fully immersive 4D experience for users.
+                        To address this issue, we propose <b>HoloTime</b>, a framework that integrates video diffusion models to generate panoramic videos from a single prompt or reference image, along with a 360-degree 4D scene reconstruction method that seamlessly transforms the generated panoramic video into 4D assets, enabling a fully immersive 4D experience for users.
                         Specifically, to tame video diffusion models for generating high-fidelity panoramic videos, we introduce the <b>360World dataset</b>, the first comprehensive collection of panoramic videos suitable for downstream 4D scene reconstruction tasks.
                         With this curated dataset, we propose <b>Panoramic Animator</b>, a two-stage image-to-video diffusion model that can convert panoramic images into high-quality panoramic videos. Following this, we present <b>Panoramic Space-Time Reconstruction</b>, which leverages a space-time depth estimation method to transform the generated panoramic videos into 4D point clouds, enabling the optimization of a holistic 4D Gaussian Splatting representation to reconstruct spatially and temporally consistent 4D scenes.
                         To validate the efficacy of our method, we conducted a comparative analysis with existing approaches, revealing its superiority in both panoramic video generation and 4D scene reconstruction. This demonstrates our method's capability to create more engaging and realistic immersive environments, thereby enhancing user experiences in VR and AR applications.
-                    </h3>
-                </p>
+                    </p>
+                </div>
             </div>
         </div>
-    
-        <!-- 第二部分：视频 -->
-        <div class="row py-5 align-items-center justify-content-center">
-            <div class="col-12 col-md-6">
-                <video class="img-fluid pb-3" loop autoplay muted controls>
-                    <source src="videos/demo_video.mp4" />
-                </video>
-            </div>
-        </div>
+      </div>
     </div> 
         
 
