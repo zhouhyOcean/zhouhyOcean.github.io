@@ -2,27 +2,172 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="description" content="Make Pixels Dance: High-Dynamic Video Generation">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Astro v4.16.17">
-    <title>HoloTime</title>
-    <!-- <link rel='icon' type='image/png' href='static/assets/logo_plus.png'> -->
-    <link rel="stylesheet" href="static/css/own.min.css">
-    <link rel="stylesheet" href="static/css/custom.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Shantell+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css" rel="stylesheet"/>
-    <script defer src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/index.min.css">
-    <link rel="stylesheet" href="static/css/index.BuZtXXU3.css">
-    <link rel="stylesheet" href="static/css/app.css">
-    <script defer src="static/js/index.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<head lang="en">
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+        }
+        .gallery-container {
+            position: relative;
+            width: 100%; /* Expand to full width */
+            margin: auto;
+          }
+          .gallery {
+            display: flex;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            padding: 10px;
+            background-color: #f5f5f5;
+            scrollbar-width: none; /* Firefox */
+          }
+          .gallery::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+          }
+          .gallery-item {
+            flex: 0 0 calc(25% - 20px); /* Four items per row */
+            margin: 0 10px;
+            text-align: center;
+          }
+          .gallery-item video {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+          }
+          .gallery-item p {
+            margin-top: 5px;
+            font-size: 14px;
+          }
+          .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 10px;
+          }
+          .arrow-left {
+            left: 10px; /* Adjust as needed */
+          }
+          .arrow-right {
+            right: 10px; /* Adjust as needed */
+          }
+          .pagination-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+          }
+          .pagination-dots span {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+          }
+          .pagination-dots .active {
+            background-color: #717171;
+          }
+        .authors {
+            color: #ffffff; /* Dark blue color */
+            font-weight: bold;
+            font-size: 1.25rem; /* Adjust font size if necessary */
+          }
+          .authors a {
+            color: #b6e0f8cb; /* Dark blue color for links */
+            text-decoration: none; /* Optional: remove underline from links */
+          }
+          .authors sup {
+            color: #99b6d8; /* Dark blue color for superscripts */
+          }
+          video { 
+            height: auto; 
+        }
+
+
+
+    </style>
+    
+    <!-- reset css  -->
+    <link href="css/vrcss/reset.css" rel="stylesheet" />
+
+    <link href="css/vrcss/index.css" rel="stylesheet" />
+
+    <script src="css/vrcss/index.js" defer></script>
+
+    <script src="css/vrcss/aframe.min.js" defer></script>
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const gallery = document.querySelector('.gallery');
+          const dotsContainer = document.querySelector('.pagination-dots');
+          const items = gallery.children;
+          const itemsCount = items.length;
+    
+          function createDots() {
+            for (let i = 0; i < itemsCount; i++) {
+              const dot = document.createElement('span');
+              dot.classList.add('dot');
+              if (i === 0) dot.classList.add('active');
+              dotsContainer.appendChild(dot);
+            }
+          }
+    
+          function updateDots() {
+            const dots = dotsContainer.children;
+            const scrollLeft = gallery.scrollLeft;
+            const itemWidth = gallery.scrollWidth / itemsCount;
+            const index = Math.round(scrollLeft / itemWidth);
+    
+            for (let i = 0; i < dots.length; i++) {
+              dots[i].classList.remove('active');
+            }
+            dots[index].classList.add('active');
+          }
+    
+
+        });
+    
+        function scrollGallery(galleryId, distance) {
+            const gallery = document.getElementById(galleryId);
+            gallery.scrollBy({
+            left: distance,
+            behavior: 'smooth'
+            });
+        }
+      </script>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Imagine360: Immersive 360 Video Generation from Perspective Anchor</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="images/teaser.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1711">
+    <meta property="og:image:height" content="576">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ys-imtech.github.io/projects/Imagine360/"/>
+    <meta property="og:title" content="Imagine360: Immersive 360 Video Generation from Perspective Anchor" />
+    <meta property="og:description" content="Imagine360 lifts standard perspective video into 360◦ video, enabling dynamic scene exploration from full 360 degrees.“
+    ."/>
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Imagine360: Immersive 360 Video Generation from Perspective Anchor" />
+    <meta name="twitter:description" content="Imagine360 lifts standard perspective video into 360◦ video, enabling dynamic scene exploration from full 360 degrees."/>
+    <meta name="twitter:image" content="images/teaser.png" />
+
+<link rel="icon" href="images/icon.png">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
     <link rel="stylesheet" href="css/app.css">
 	<link rel="stylesheet" href="css/fontawesome.all.min.css">
@@ -42,13 +187,14 @@
 
     <script src="js/app.js"></script>
     <script src="js/synced_video_selector.js"></script>
+
 </head>
 
-<body>
-
+<body style="padding: 0%; width: 100%">
+    <div class="desktop-content">
     <div class="video-background" style="margin-bottom: 0px; padding-bottom: 0px;">
         <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-            <source src="vis/test_12_loop.mp4" type="video/mp4">
+            <source src="videos/teaser/teaser.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
         <div class="flex-center-container"> <!-- New container for flexbox centering -->
@@ -90,717 +236,475 @@
             </div>
         </div>
     </div>
-    <!--
-    <div class="relative w-full h-[70vh] overflow-hidden">
-        <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover" src="vis/test_12_loop.mp4"></video>
-        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-        <div class="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 space-y-6">
-            <h1 class="font-medium" style="font-family: Arial, sans-serif; font-weight: bold; text-shadow: 2px 2px 4px #000000; color: #FFFFFF; font-size: 5em;">HoloTime</h1>
-            <p class="text-xl md:text-2xl text-center">Taming Video Diffusion Models for Panoramic 4D Scene Generation</p>
-            <div class="text-center space-y-4">
-                <div class="flex flex-wrap justify-center gap-x-2 text-lg">
-                    <span class="font-medium">
-                        Haiyang Zhou<sup>1 *</sup>,
-                    </span>
-                    <span class="font-medium">
-                        Wangbo Yu<sup>1,2 *</sup>
-                    </span>
-                    <span class="font-medium">
-                        Jiawen Guan<sup>3</sup>,
-                    </span>
-                    <span class="font-medium">
-                        Xinhua Cheng<sup>1</sup>,
-                    </span>
-                    <span class="font-medium">
-                        Yonghong Tian<sup>1,2 †</sup>,
-                    </span>
-                    <span class="font-medium">
-                        Li Yuan<sup>1,2 †</sup>
-                    </span>
-                </div>
-                <div class="text-sm space-y-1"><sup>1</sup> Peking University&nbsp;&nbsp;&nbsp;<sup>2</sup> Peng Cheng Laboratory&nbsp;&nbsp;&nbsp;<sup>3</sup> Harbin Institute of Technology</div>
-                <div class="text-sm space-y-1">(* Equal Contribution, † Corresponding Author)</div>
-            </div>
-            <div class="flex flex-wrap justify-center gap-4 mt-8">
-                <a href="https://arxiv.org/abs/2412.11100" target="_blank" class="inline-flex items-center px-4 py-2 border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 border-transparent text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
-                    </svg>
-                    Paper
-
-                </a>
-            </div>
-        </div>
-                <div class="absolute bottom-4 right-4 z-10 text-white bg-black bg-opacity-50 px-4 py-2 rounded-md text-sm">It may take few moments to load the videos, please wait patiently :)</div>
-    </div>
-    -->
-
-<!-- <section class="hero">
-    <div class="columns" style="background: linear-gradient(#9D9D9D, #FfFfFf);">
-        <div class="column auto"></div>
-        <div class="column is-half">
-            <div class="hero-body-long-video" style="display: flex; flex-direction: column; justify-content: space-around;">
-                <div class="column-video" style="border-radius:10px;justify-content: center;align-items: center; font-size: 100px;">
-                    <iframe src="dummy" src="" class="frame" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="long-font" style="font-family:'Acme';color:#595959;">
-                    View 4D4DGen in VR
-                </div>
-            </div>
-        </div>
-        <div class="column auto"></div>
-    </div>
-</section> -->
-
-<!-- <div style="border: #ffffff 20px solid;"></div> -->
-
-<!-- <section class="hero">
-    <div class="hero-body-subtitle"  style="display: block">
-        <div class="columns is-centered has-text-centered">
-            <div class="container is-max-maxwidth">
-                <div class="title sansfont mode-font" style="font-family:'Acme';color:#595959;">
-                    Basic Mode 
-                    4K4D Generation
-                </div>
-                <div class="note-font" style="margin-top: -10pt; font-style: italic;">
-                    *with a static panorama, a 4D scene could be generated at 4K resolution.
-                </div>
-            </div>
-        </div>
 
     </div>
-</section> 
--->
+    <div class="mobile-content">
+        <div class="container-fluid h-100 h-md-100 w-100 d-flex flex-column justify-content-center text-center my-5" style="height:100vh;">
+            <div class="row justify-content-center mb-3 order-md-first">
+                <div class="col-12">
 
-<!-- <div style="border: #999999 1px solid;"></div> -->
+                    
+                  <video class="img-fluid pb-3" loop autoplay muted controls>
+                    <source src="videos/demo_video.mp4" />
+                </video>
 
-
-<section class="hero is-light" style="padding-top: 2em;">
-    <div class="columns" style="display: flex; width: 100%;">
-        <div class="v-column-left"></div>
-
-        <div class="v-column-center" style="text-align: center; display: flex;">
-            <img width="100%" src="static/assets/teaser.png" alt="Image" style="border-radius: 6pt;">
-            
-            <!-- 
-            <div class="" style="width: 40%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <img width="100%" src="vis/I2/I2.jpg" alt="Image" style="border-radius: 6pt;">
-                <p class="handtext instruct-font">Static Panorama</p>
-            </div>
-            <div class="" style="width: 20%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <div class="box handtext ist-font" style="text-align: center; background-color: #ffffff00; box-shadow: 0 0 0;">
-                    <i class="fa-solid fa-video"></i>
-                </div>
-            </div>
-            <div class="" style="width: 28%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <img width="100%" src="vis/I2/0004.gif" alt="Image" style="border-radius: 6pt;">
-                <img width="100%" src="vis/I2/0006.gif" alt="Image" style="border-radius: 6pt;">
-            </div> -->
-
-        </div>
-        <!-- <div class="note-font" style="margin-top: -10pt; font-style: italic;">
-            *with text instruction and image instruction, generating more motion-rich videos even with out-of-domain inputs
-        </div> -->
-        <div class="v-column-right"></div>
-        
-    </div>
+                    <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var video = document.getElementById('myVideo');
     
-    <div class="note-font" style="margin-top: -20pt; font-style: italic;">
-        <p align="center">
-            HoloTime generates 4D scene from a single static panorama at 4K resolution.
-        </p>
-    </div>
-</section>
-
-<!-- <div style="border: #ffffff 20px solid;"></div> -->
-
-<section class="hero">
-    <div class="hero-body-subtitle"  style="display: block;">
-        <div class="columns is-centered has-text-centered">
-            <div class="container is-max-maxwidth">
-                <div class="title sansfont mode-font" style="font-family:'Acme';color:#595959;">
-                    <!-- Basic Mode -->
-                    Gallery
-                </div>
-                <div class="note-font" style="margin-top: -10pt; font-style: italic;">
-                    *with a static panorama, we show the rendered perspective videos at llff trajectory.
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<div style="border: #999999 1px solid;"></div>
-
-
-<section class="section">
-    <div class="container is-max-desktop">
-  
-      <div class="columns is-centered">
-  
-        <!-- Visual Effects. -->
-        <div class="column">
-          <div class="content">
-            <!-- <h2 class="title is-3">Visual Effects</h2> -->
-            <!-- <p>
-              Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-              would be impossible without nerfies since it would require going through a wall.
-            </p> -->
-            <!-- <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-              <source src="static/videos/dollyzoom-stacked.mp4"
-                      type="video/mp4">
-            </video> -->
-            <img width="100%" src="vis/I2/pano.png" alt="Image" style="border-radius: 6pt;">
-            
-            <div class="columns is-centered">
-                <div class="column content">
-                    <img width="100%" src="vis/I2/d1.gif" alt="Image" style="border-radius: 6pt;">
-                    <img width="100%" src="vis/I2/d2.gif" alt="Image" style="border-radius: 6pt;">
-                </div>
-                <!-- </div> -->
-                <!-- <div class="column"> -->
-                <div class="column content">
-                    <img width="100%" src="vis/I2/d3.gif" alt="Image" style="border-radius: 6pt;">
-                    <img width="100%" src="vis/I2/d4.gif" alt="Image" style="border-radius: 6pt;">
-                </div>
-                    <!-- </div> -->
-            </div>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="content">
-              <!-- <h2 class="title is-3">Visual Effects</h2> -->
-              <!-- <p>
-                Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-                would be impossible without nerfies since it would require going through a wall.
-              </p> -->
-              <!-- <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-                <source src="static/videos/dollyzoom-stacked.mp4"
-                        type="video/mp4">
-              </video> -->
-              <img width="100%" src="vis/E34/pano.png" alt="Image" style="border-radius: 6pt;">
-              
-              <div class="columns is-centered">
-                  <div class="column content">
-                      <img width="100%" src="vis/E34/d1.gif" alt="Image" style="border-radius: 6pt;">
-                      <img width="100%" src="vis/E34/d3.gif" alt="Image" style="border-radius: 6pt;">
-                    </div>
-                    <div class="column content">
-                        <img width="100%" src="vis/E34/d2.gif" alt="Image" style="border-radius: 6pt;">
-                        <img width="100%" src="vis/E34/d4.gif" alt="Image" style="border-radius: 6pt;">
-                    </div>
-                </div>                
-              </div>
-          </div>          
-    </div>
-    </div>
-
-    <div class="container is-max-desktop">
-  
-        <div class="columns is-centered">
+                        function isMobileDevice() {
+                            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+                        };
     
-          <!-- Visual Effects. -->
-          <div class="column">
-            <div class="content">
-              <!-- <h2 class="title is-3">Visual Effects</h2> -->
-              <!-- <p>
-                Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-                would be impossible without nerfies since it would require going through a wall.
-              </p> -->
-              <!-- <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-                <source src="static/videos/dollyzoom-stacked.mp4"
-                        type="video/mp4">
-              </video> -->
-              <img width="100%" src="vis/B11/pano.png" alt="Image" style="border-radius: 6pt;">
-              
-              <div class="columns is-centered">
-                  <div class="column content">
-                      <img width="100%" src="vis/B11/d1.gif" alt="Image" style="border-radius: 6pt;">
-                      <img width="100%" src="vis/B11/d2.gif" alt="Image" style="border-radius: 6pt;">
-                  </div>
-                  <!-- </div> -->
-                  <!-- <div class="column"> -->
-                  <div class="column content">
-                      <img width="100%" src="vis/B11/d3.gif" alt="Image" style="border-radius: 6pt;">
-                      <img width="100%" src="vis/B11/d4.gif" alt="Image" style="border-radius: 6pt;">
-                  </div>
-                      <!-- </div> -->
-              </div>
+                        if (!isMobileDevice()) {
+                            setTimeout(function() {
+                                video.setAttribute('controls', '');
+                            }, 1500); // 2000 milliseconds = 2 seconds
+                        } else {
+                            video.setAttribute('controls', '');
+                        }
+                    });
+                    </script>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-12">
+                    <h2><b>Imagine360</b>: Immersive 360 Video <br/> Generation from Perspective Anchor</h2>
+                </div>
+
+                <p class="title is-5 mt-2 authors"> 
+                  <a href="https://sparkstj.github.io/" target="_blank">Jing Tan</a><sup>1,4*</sup>, 
+                  <a href="https://ys-imtech.github.io/" target="_blank">Shuai Yang</a><sup>2,4*</sup>, 
+
+                  <a href="https://wutong16.github.io/" target="_blank">Tong Wu</a><sup>1,4</sup>&#9993, 
+                  <a href="https://github.com/hejingwenhejingwen" target="_blank">Jingwen He</a><sup>1</sup>, 
+
+                  <a href="https://guoyww.github.io/" target="_blank">Yuwei Guo</a><sup>1</sup>,
+                  <a href="https://liuziwei7.github.io/" target="_blank">Ziwei Liu</a><sup>3,4</sup>,
+                  <a href="http://dahua.me/" target="_blank">Dahua Lin</a><sup>1,4</sup>&#9993
+            
+                </p>
+                <!-- affiliations -->
+                <p class="subtitle is-5"> 
+                  <sup>1</sup> The Chinese University of Hong Kong, 
+                  <sup>2</sup> Shanghai Jiao Tong University, 
+                  <!-- <br> -->
+                  <sup>3</sup> S-Lab, Nanyang Technological University
+                  <sup>4</sup> Shanghai AI Laboratory,
+                </p>
+
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-12">
+                </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-12 h3">                        
+                  <a href="https://arxiv.org/abs/2412.03552" class="btn btn-light" role="button" style="font-size: 20px;">Paper</a>
+                  <a href="https://www.youtube.com/watch?v=gRGo4B41GXY" class="btn btn-light" role="button" style="font-size: 20px;" >Youtube</a>
+                  <a href="https://github.com/YS-IMTech/Imagine360" class="btn btn-light" role="button" style="font-size: 20px;">Code</a>
               </div>
           </div>
-  
-          <div class="column">
-              <div class="content">
-                <!-- <h2 class="title is-3">Visual Effects</h2> -->
-                <!-- <p>
-                  Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-                  would be impossible without nerfies since it would require going through a wall.
-                </p> -->
-                <!-- <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-                  <source src="static/videos/dollyzoom-stacked.mp4"
-                          type="video/mp4">
-                </video> -->
-                <img width="100%" src="vis/B23/pano.png" alt="Image" style="border-radius: 6pt;">
-                
-                <div class="columns is-centered">
-                    <div class="column content">
-                        <img width="100%" src="vis/B23/d1.gif" alt="Image" style="border-radius: 6pt;">
-                        <img width="100%" src="vis/B23/d3.gif" alt="Image" style="border-radius: 6pt;">
-                      </div>
-                      <div class="column content">
-                          <img width="100%" src="vis/B23/d2.gif" alt="Image" style="border-radius: 6pt;">
-                          <img width="100%" src="vis/B23/d4.gif" alt="Image" style="border-radius: 6pt;">
-                      </div>
-                  </div>                
-                </div>
-            </div>          
-      </div>
-      </div>
-      
-    </div>
-    </section>
-
-
-<section class="hero">
-    <div class="hero-body-subtitle"  style="display: block">
-        <div class="columns is-centered has-text-centered">
-            <div class="container is-max-maxwidth">
-                <div class="title sansfont mode-font" style="font-family:'Acme';color:#595959;">
-                    <!-- Basic Mode -->
-                    Panoramic Video Anination (1/2)
-                </div>
-                <div class="note-font" style="margin-top: -10pt; font-style: italic;">
-                    *with a static panorama, we show panoramic video generated by the panoramic denoiser.
-                </div>
-            </div>
         </div>
-
-    </div>
-</section>
-
-
-<div style="border: #999999 1px solid;"></div>
-  
-<section class="hero is-light" style="padding-top: 2em; padding-bottom: 2em;">
-
-    <div class="columns" style="display: flex; width: 100%;">
-        <div class="v-column-left"></div>
-
-        <div class="v-column-center" style="text-align: center; display: flex;">
-            <img width="100%" src="static/assets/animating.png" alt="Image" style="border-radius: 6pt;">
-            
-            <!-- 
-            <div class="" style="width: 40%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <img width="100%" src="vis/I2/I2.jpg" alt="Image" style="border-radius: 6pt;">
-                <p class="handtext instruct-font">Static Panorama</p>
-            </div>
-            <div class="" style="width: 20%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <div class="box handtext ist-font" style="text-align: center; background-color: #ffffff00; box-shadow: 0 0 0;">
-                    <i class="fa-solid fa-video"></i>
-                </div>
-            </div>
-            <div class="" style="width: 28%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <img width="100%" src="vis/I2/0004.gif" alt="Image" style="border-radius: 6pt;">
-                <img width="100%" src="vis/I2/0006.gif" alt="Image" style="border-radius: 6pt;">
-            </div> -->
-
-        </div>
-        <!-- <div class="note-font" style="margin-top: -10pt; font-style: italic;">
-            *with text instruction and image instruction, generating more motion-rich videos even with out-of-domain inputs
-        </div> -->
-        <div class="v-column-right"></div>
-        
-    </div>
-
-    <div class="columns" style="display: flex; width: 100%; padding-top: 2em;">
-        <div class="v-column-left"></div>
-
-        <div class="v-column-center" style="text-align: center; display: flex;">
-
-            <div class="" style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                
-                <p class="handtext instruct-font">Static Panorama</p>
-                <img width="100%" src="vis/I2/pano.png" alt="Image" style="border-radius: 6pt;">
-                <!-- <video class='lazy' autoplay loop muted width='100%'><source data-src='vis/I2/vid.mp4' type='video/mp4'></video> -->
-            </div>
-            <div class="" style="width: 20%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <div class="box handtext ist-font" style="text-align: center; background-color: #ffffff00; box-shadow: 0 0 0;">
-                    <i class="fa-solid fa-video"></i>
-                </div>
-            </div>
-            <div class="" style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <!-- <img width="100%" src="vis/B11/pano.png" alt="Image" style="border-radius: 6pt;"> -->
-                <p class="handtext instruct-font">Panoramic Video</p>
-            
-                <video class='lazy' autoplay loop muted width='100%'><source data-src='static/assets/test_12.mp4' type='video/mp4'></video>
-            </div>
-        </div>
-        <div class="v-column-right"></div>
-    </div>
-
     
-    <div class="columns" style="display: flex; width: 100%; padding-top: 1em">
-        <div class="v-column-left"></div>
-
-        <div class="v-column-center" style="text-align: center; display: flex;">
-
-            <div class="" style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                
-                <!-- <p class="handtext instruct-font">Static Panorama</p> -->
-                <img width="100%" src="vis/E34/pano.png" alt="Image" style="border-radius: 6pt;">
-                <!-- <video class='lazy' autoplay loop muted width='100%'><source data-src='vis/I2/vid.mp4' type='video/mp4'></video> -->
-            </div>
-            <div class="" style="width: 20%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <div class="box handtext ist-font" style="text-align: center; background-color: #ffffff00; box-shadow: 0 0 0;">
-                    <i class="fa-solid fa-video"></i>
-                </div>
-            </div>
-            <div class="" style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <!-- <img width="100%" src="vis/B11/pano.png" alt="Image" style="border-radius: 6pt;"> -->
-                <!-- <p class="handtext instruct-font">Panoramic Video</p> -->
-            
-                <video class='lazy' autoplay loop muted width='100%'><source data-src='vis/E34/vid.mp4' type='video/mp4'></video>
-            </div>
-        </div>
-        <div class="v-column-right"></div>
-    </div>
-
-
-    <div class="columns" style="display: flex; width: 100%; padding-top: 1em">
-        <div class="v-column-left"></div>
-
-        <div class="v-column-center" style="text-align: center; display: flex;">
-
-            <div class="" style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                
-                <!-- <p class="handtext instruct-font">Static Panorama</p> -->
-                <img width="100%" src="vis/B11/pano.png" alt="Image" style="border-radius: 6pt;">
-                <!-- <video class='lazy' autoplay loop muted width='100%'><source data-src='vis/I2/vid.mp4' type='video/mp4'></video> -->
-            </div>
-            <div class="" style="width: 20%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <div class="box handtext ist-font" style="text-align: center; background-color: #ffffff00; box-shadow: 0 0 0;">
-                    <i class="fa-solid fa-video"></i>
-                </div>
-            </div>
-            <div class="" style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <!-- <img width="100%" src="vis/B11/pano.png" alt="Image" style="border-radius: 6pt;"> -->
-                <!-- <p class="handtext instruct-font">Panoramic Video</p> -->
-            
-                <video class='lazy' autoplay loop muted width='100%'><source data-src='vis/B11/vid.mp4' type='video/mp4'></video>
-            </div>
-        </div>
-        <div class="v-column-right"></div>
-    </div>
-
-    <div class="columns" style="display: flex; width: 100%; padding-top: 1em">
-        <div class="v-column-left"></div>
-
-        <div class="v-column-center" style="text-align: center; display: flex;">
-
-            <div class="" style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                
-                <!-- <p class="handtext instruct-font">Static Panorama</p> -->
-                <img width="100%" src="vis/B23/pano.png" alt="Image" style="border-radius: 6pt;">
-                <!-- <video class='lazy' autoplay loop muted width='100%'><source data-src='vis/I2/vid.mp4' type='video/mp4'></video> -->
-            </div>
-            <div class="" style="width: 20%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <div class="box handtext ist-font" style="text-align: center; background-color: #ffffff00; box-shadow: 0 0 0;">
-                    <i class="fa-solid fa-video"></i>
-                </div>
-            </div>
-            <div class="" style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <!-- <img width="100%" src="vis/B11/pano.png" alt="Image" style="border-radius: 6pt;"> -->
-                <!-- <p class="handtext instruct-font">Panoramic Video</p> -->
-            
-                <video class='lazy' autoplay loop muted width='100%'><source data-src='vis/B23/vid.mp4' type='video/mp4'></video>
-            </div>
-        </div>
-        <div class="v-column-right"></div>
-    </div>
-
-</section>
-
-
-<section class="hero">
-    <div class="hero-body-subtitle"  style="display: block">
-        <div class="columns is-centered has-text-centered">
-            <div class="container is-max-maxwidth">
-                <div class="title sansfont mode-font" style="font-family:'Acme';color:#595959;">
-                    <!-- Basic Mode -->
-                    4D Panoramic Lifting (2/2)
-                </div>
-                <div class="note-font" style="margin-top: -10pt; font-style: italic;">
-                    *We lift the panoramic video into spatially and temporally consistent 4D scene.
+        <div class="video-background">
+            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+                <source src="videos/teaser/teaser.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+            <div class="flex-center-container"> 
+                <div class="content">
+                    <h1>We generate Hyper-Immersive Panoramic Video</h1>
+                    <h3>from a single perspective anchor</h3>
                 </div>
             </div>
         </div>
-
-    </div>
-</section>
-
-<section class="hero is-light" style="padding-top: 2em; padding-bottom: 2em;">
-    <div class="columns" style="display: flex; width: 100%;">
-        <div class="v-column-left"></div>
-
-        <div class="v-column-center" style="text-align: center; display: flex;">
-            <img width="100%" src="static/assets/lifting.png" alt="Image" style="border-radius: 6pt;">
-            
-            <!-- 
-            <div class="" style="width: 40%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <img width="100%" src="vis/I2/I2.jpg" alt="Image" style="border-radius: 6pt;">
-                <p class="handtext instruct-font">Static Panorama</p>
-            </div>
-            <div class="" style="width: 20%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <div class="box handtext ist-font" style="text-align: center; background-color: #ffffff00; box-shadow: 0 0 0;">
-                    <i class="fa-solid fa-video"></i>
-                </div>
-            </div>
-            <div class="" style="width: 28%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                <img width="100%" src="vis/I2/0004.gif" alt="Image" style="border-radius: 6pt;">
-                <img width="100%" src="vis/I2/0006.gif" alt="Image" style="border-radius: 6pt;">
-            </div> -->
-
-        </div>
-        <!-- <div class="note-font" style="margin-top: -10pt; font-style: italic;">
-            *with text instruction and image instruction, generating more motion-rich videos even with out-of-domain inputs
-        </div> -->
-        <div class="v-column-right"></div>
-        
-    </div>
     
-    <!-- <div class="note-font" style="margin-top: 0pt; font-style: italic;">
-        <p align="center">
-            HoloTime generates 4D scene from a single static panorama at 4K resolution.
-        </p>
-    </div> -->
-</section>
-
-
-<!-- <section class="hero is-light">
-<section class="section">
-    <div class="container is-clipped">
-        <div id="slide1r" class="custom-slider">
-            <div class='card-0'>
-                <div class='card card-1'>
-                    <div class='card-image'>
-                        <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/26_0/a-watermark.mp4' type='video/mp4'></video>
-                    </div>
-                    <div class='card-content'>
-                        <div class='prompt'>The skull is burining, red fires, the skull exploding</div>
-                    </div>
-                </div>
-                <div class='card card-1'>
-                    <div class='card-image'>
-                        <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/40_0/a-watermark.mp4' type='video/mp4'></video>
-                    </div>
-                    <div class='card-content'>
-                        <div class='prompt'>The cyber metal tiger is roaring and walking, blue light, cyberpunk street, dark, light</div>
-                    </div>
-                </div>
-            </div>
-            <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/2_0/2_0-b-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>An angry Godzilla is roaring and raising hands, big fire is burning and bombs are exploding in the background</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/127/a-3-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Rotate, rotate around the golden rabbit model</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/103_0/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Coloful powder exploding</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/107_0/a-4-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Girl rotate head slowly, smiling, hair fluttering, leaves floating, slowly</div></div></div></div>
-            <div class='card-0'>
-                <div class='card card-1'>
-                    <div class='card-image'>
-                        <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/30_0_case1/a-3-watermark.mp4' type='video/mp4'></video></div>
-                    <div class='card-content'>
-                        <div class='prompt'>The comic girl walking along the road, hair is futtering, petal floating and falling down</div>
-                    </div>
-                </div>
-            <div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/16_0/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Blue flowers grow out from the skull slowly</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/134/a-2-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Boy walking in the street, butterflies flying</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/49_0/a-1-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The girl is smiling and winking, hair fluttering</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/5_0/a-2-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A cute cat pirat is sufing on the sea, it raises its hands and dances on the board, the waves are surging</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/7_0/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A happy panda is playing guitar and singing loudly, music symbols are slowly generated from the guitar and floating in the sky</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/44_0/b-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The cat in a coat is slowly raising its hand to salute, salute</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/9_0/a-2-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A kawaii squirrel is surfing and dancing on the board</div></div></div></div> <div class='card-0'>
-            <div class='card card-1'>
-                <div class='card-image'>
-                    <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/116/a-2-watermark.mp4' type='video/mp4'></video>
-                </div>
-                <div class='card-content'>
-                    <div class='prompt'>Mini batman surfing on the sea, batman dancing on the boarrd, waves surging high</div>
-                </div>
-            </div>
-            <div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/13_0/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Two jedi cats are fighting with each other in the forest</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/28_0/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The girl is laughing, hair fluttering, butterfly is flying</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/30_0_case3/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The comic girl dancing on the road, hair is futtering, petal floating and falling down, fireworks exploding in the remote</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/36_0/b-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The girl is thinking, hair is fluttering, birds flying in the sky</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/37_0/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The boat is floating on the sea, waves are surging</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/38_0/a_SUP_500-crop-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The cyber metal tiger is riding a motorcycle across the street, fast speed, cyberpunk street, dark, light</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/11_0/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Batman and ironman are dancing</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/130/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The battleship is firing, bombs exploding</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/140/a-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Cyberpunk man riding a horsethrough the street, pink light, slowly</div></div></div></div>
-        </div>
     </div>
-</section>
-</section> -->
 
-<!-- 
-<div style="border: #ffffff 20px solid;"></div>
 
-<section class="hero">
-    <div class="hero-body-subtitle-light"  style="display: block">
-        <div class="columns is-centered has-text-centered">
-            <div class="container is-max-maxwidth">
-                <div class="title is-2 sansfont" style="font-family:'Acme';color:#595959; font-size: 68px;">
-                    I will refer to this to build the gallery
+
+    <div class="desktop-content">
+        <div class="container-fluid px-5" id="main">
+
+            <div class="row py-5 align-items-center justify-content-center" id="abstract">
+                <div class="col-md-5">
+                    <h1 class="text-center pb-5 text-bold">
+                        <b>Abstract</b>
+                    </h1>
+                    <p class="text-justify px-5">
+                        <h3 style="font-size: 18px; font-weight: normal;">
+
+                          360° videos offer a hyper-immersive experience that allows the viewers to explore a dynamic scene from full 360 degrees. 
+                          To achieve more user-friendly and personalized content creation in 360° video format, we seek to lift standard perspective videos into 360° equirectangular videos. To this end, we introduce <b>Imagine360</b>, the first perspective-to-360° video generation framework that creates high-quality 360° videos with rich and diverse motion patterns from video-based control.
+                          Imagine360 learns fine-grained spherical visual and motion patterns from limited 360° video data with several key designs. 
+                          <b>1)</b> Firstly we adopt the dual-branch design, including a perspective and a panorama video denoising branch to provide local and global constraints for 360° video generation, with motion module and spatial LoRA layers fine-tuned on extended web 360° videos.
+                          <b>2)</b>Additionally, an antipodal mask is devised to capture long-range motion dependencies, enhancing the reversed camera motion between antipodal pixels across hemispheres.
+                          <b>3)</b> To handle general perspective video inputs, we propose elevation-aware designs that adapt to varying video masking due to changing elevations across frames.
+                          Extensive experiments show Imagine360 achieves superior graphics quality and motion coherence among state-of-the-art 360° video generation methods. We believe Imagine360 holds promise for advancing personalized, immersive 360° video creation.
+
+                    </h3>
+
+                    </p>
                 </div>
-                <div class="note-font"style="margin-top: -10pt; font-style: italic;">
-                    to select the samples by click on the left & right button
+
+                <div class="col-md-7">
+
+
+                  <video class="img-fluid pb-3" loop autoplay muted controls>
+                    <source src="videos/demo_video.mp4" />
+                </video>
+
+
                 </div>
             </div>
-        </div>
+            <br>
+        </div>  
+        
 
     </div>
-</section>
 
-<div style="border: #999999 1px solid;"></div>
+    <div class="mobile-content">
+        <div class="container" id="main">
 
- -->
+            <div class="row py-5 align-items-center justify-content-center" id="abstract">
+                <div class="col-md-6">
+                    <h1 class="text-center pb-5 text-bold">
+                        <b>Abstract</b>
+                    </h1>
+                    <p class="text-justify">
 
-    <!-- 
-    <section class="hero" style="padding-top: 2em;">
-        <div class="v-columns" style="display: flex; width: 100%;">
-            <div class="v-column-left"></div>
+                      360° videos offer a hyper-immersive experience that allows the viewers to explore a dynamic scene from full 360 degrees. 
+                      To achieve more user-friendly and personalized content creation in 360° video format, we seek to lift standard perspective videos into 360° equirectangular videos. To this end, we introduce <b>Imagine360</b>, the first perspective-to-360° video generation framework that creates high-quality 360° videos with rich and diverse motion patterns from video-based control.
+                      Imagine360 learns fine-grained spherical visual and motion patterns from limited 360° video data with several key designs. 
+                      <b>1)</b> Firstly we adopt the dual-branch design, including a perspective and a panorama video denoising branch to provide local and global constraints for 360° video generation, with motion module and spatial LoRA layers fine-tuned on extended web 360° videos.
+                      <b>2)</b>Additionally, an antipodal mask is devised to capture long-range motion dependencies, enhancing the reversed camera motion between antipodal pixels across hemispheres.
+                      <b>3)</b> To handle general perspective video inputs, we propose elevation-aware designs that adapt to varying video masking due to changing elevations across frames.
+                      Extensive experiments show Imagine360 achieves superior graphics quality and motion coherence among state-of-the-art 360° video generation methods. We believe Imagine360 holds promise for advancing personalized, immersive 360° video creation.
 
-            <div class="v-column-center" style="text-align: center; display: flex;">
-
-                <div class="" style="width: 33%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                    <img src="videos/57_30/c.png" alt="Image" style="border-radius: 6pt;">
-                    <p class="handtext instruct-font">Image Instructions</p>
-                </div>
-                <div class="" style="width: 45%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                    <div class="box handtext ist-font" style="text-align: center; background-color: #ffffff00; box-shadow: 0 0 0;">
-                        <i class="fa-solid fa-plus"></i>
-                    </div>
-                    <div class="box handtext example-font" style="font-size: 1.25em; text-align: center; box-shadow: 0 0.5em 1em 0.125em rgba(10,10,10,.1), 0 0 0 2px rgba(10,10,10,.02);">
-                        The ball is in fire and turns into a dragon in fire
-                    </div>
-                    <div class="box handtext ist-font" style="text-align: center; background-color: #ffffff00; box-shadow: 0 0 0;">
-                        <i class="fa-solid fa-video"></i>
-                    </div>
-                </div>
-                <div class="" style="width: 22%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-                    <video class="lazy" width="100%" autoplay loop muted style="border-radius: 6pt;">
-                        <source data-src="videos/57_30/b-watermark.mp4" type="video/mp4">
-                    </video>
+                    </p>
                 </div>
 
             </div>
+            <br>
+        </div>    
+    </div>
 
-            <div class="v-column-right"></div>
+
+
+    <div class="container-fluid">
+      <div class="row py-5  bg-dark">
+          <div class="col-2"></div>
+          <div class="col-md-8">
+              <h1 class="text-center pb-3 text-white">
+                <b>Gallery <span class="small-text">(click below pano videos to open VR mode)</span></b>
+
+              </h1>
+              <p class="text-center small-text" style="color: red; font-weight: bold;"> 
+                We highly recommend using a mobile phone to access the website(better use Chrome browser) for device motion tracking, enhancing the immersive quality of the VR interactive experience.             </p>
+              </p>
+              
+              <p class="text-center small-text" style="color: yellow; font-weight: bold;"> 
+                NOTE: The Loading may be a little slow, but your wait will be worth it !!!           </p>
+              </p>
+
+              <script>
+                  activeMethodPill = "zipnerf"
+                  activeScenePill = document.querySelector('.scene-pill.active-pill');
+                  activeModePill = document.querySelector('.mode-pill.active-pill');
+              </script>
+              
+              <div class="text-center">
+                  <div class="video-container">
+
+                    <div class="video">
+                      <video class="video" style="width: 100%; max-width: 100%;" id="compVideo0" loop playsinline autoplay muted>
+                          <source data-src="videos/results/PANO VIDEO/a city street covered in snow with cherry blossom trees lining the sidewalks.mp4">
+                      </video>
+                  </div>
+
+
+                  
+                  <video class="video" style="width: 100%; max-width: 100%; display: none;" id="compVideo1" loop playsinline autoplay muted>
+                      <source src="videos/results/INPUT VIDEO/a city street covered in snow with cherry blossom trees lining the sidewalks.mp4" />
+                  </video>
+
+
+
+                  </div>
+                  <div class="text-center" style="color: black;" id="mode-pills">
+                      <div class="btn-group btn-group-sm">
+
+                          <span class="btn btn-primary mode-pill active" data-value="PANO VIDEO"
+                              onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                              PANO VIDEO
+                          </span>
+
+                          <span class="btn btn-primary mode-pill active" data-value="INPUT VIDEO"
+                              onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                              INPUT VIDEO
+                          </span>
+
+
+                      </div>
+                  </div>
+
+
+                  <br>
+                  <p class="text-justify text-white" style="text-align: center;" id="prompt-box">a city street covered in snow with cherry blossom trees lining the sidewalks. </p>
+                  <script>
+                          const video0 = document.getElementById("compVideo0");
+                          const video1 = document.getElementById("compVideo1");
+
+                          function switchVideo(activeVidID) {
+                              if (activeVidID === 0) {
+                                  video0.classList.add("active"); 
+                                  video1.classList.remove("active"); 
+                                  video0.play();
+                                  video1.pause();
+                              } else if (activeVidID === 1) {
+                                  video1.classList.add("active"); 
+                                  video0.classList.remove("active"); 
+                                  video1.play();
+                                  video0.pause();
+                              }
+                          }
+
+                          document.querySelector("button#switchToVideo0").addEventListener("click", () => {
+                              switchVideo(0); 
+                          });
+
+                          document.querySelector("button#switchToVideo1").addEventListener("click", () => {
+                              switchVideo(1); 
+                          });
+                  </script>
+
+
+                  <div class="pill-row scene-pills" id="scene-pills">
+
+                      <span class="pill scene-pill active" data-value="a city street covered in snow with cherry blossom trees lining the sidewalks" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                          <img class="thumbnail-img" src="videos/results/inputs/a city street covered in snow with cherry blossom trees lining the sidewalks.png" alt="a city street covered in snow with cherry blossom trees lining the sidewalks" width="64">
+                      </span>
+
+                      <span class="pill scene-pill" data-value="a group of three animals walking down a dirt road" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                        <img class="thumbnail-img" src="videos/results/inputs/a group of three animals walking down a dirt road.png" alt="a group of three animals walking down a dirt road" width="64">
+                    </span>
+
+                    <span class="pill scene-pill" data-value="a river with rough waters and rapids, with a rocky mountain in the background" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                      <img class="thumbnail-img" src="videos/results/inputs/a river with rough waters and rapids, with a rocky mountain in the background.png" alt="a river with rough waters and rapids, with a rocky mountain in the background" width="64">
+                  </span>
+
+
+                      <span class="pill scene-pill" data-value="a white SUV driving down a dirt road in a forested mountain valley" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                        <img class="thumbnail-img" src="videos/results/inputs/a white SUV driving down a dirt road in a forested mountain valley.png" alt="a white SUV driving down a dirt road in a forested mountain valley" width="64">
+                    </span>
+
+                    <span class="pill scene-pill" data-value="a serene pond filled with colorful koi fish" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                      <img class="thumbnail-img" src="videos/results/inputs/a serene pond filled with colorful koi fish.png" alt="a serene pond filled with colorful koi fish" width="64">
+                  </span>
+
+                    <span class="pill scene-pill" data-value="Stonehenge in Wiltshire, England, under the green Northern Lights" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                      <img class="thumbnail-img" src="videos/results/inputs/Stonehenge in Wiltshire, England, under the green Northern Lights.png" alt="Stonehenge in Wiltshire, England, under the green Northern Lights" width="64">
+                  </span>
+
+                  <span class="pill scene-pill" data-value="a rocky coastline with a lighthouse standing on a cliff" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                    <img class="thumbnail-img" src="videos/results/inputs/a rocky coastline with a lighthouse standing on a cliff.png" alt="a rocky coastline with a lighthouse standing on a cliff" width="64">
+                </span>
+
+                      <span class="pill scene-pill" data-value="a cute golden retriever wearing sunglasses and running outside in the rain" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                          <img class="thumbnail-img" src="videos/results/inputs/a cute golden retriever wearing sunglasses and running outside in the rain.png" alt="a cute golden retriever wearing sunglasses and running outside in the rain" width="64">
+                      </span>
+
+                      <span class="pill scene-pill" data-value="a large glass display case filled with various electronic devices" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                          <img class="thumbnail-img" src="videos/results/inputs/a large glass display case filled with various electronic devices.png" alt="a large glass display case filled with various electronic devices" width="64">
+                      </span>
+
+                      <span class="pill scene-pill" data-value="a lighthouse on a cliff overlooking the ocean" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                          <img class="thumbnail-img" src="videos/results/inputs/a lighthouse on a cliff overlooking the ocean.png" alt="a lighthouse on a cliff overlooking the ocean" width="64">
+                      </span>
+
+                      <span class="pill scene-pill" data-value="a man standing on a hill overlooking a stunning mountain lake" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                          <img class="thumbnail-img" src="videos/results/inputs/a man standing on a hill overlooking a stunning mountain lake.png" alt="a man standing on a hill overlooking a stunning mountain lake" width="64">
+                      </span>
+
+                      <span class="pill scene-pill" data-value="a red gondola lift in a mountainous region, with a beautiful sunset in the background" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                          <img class="thumbnail-img" src="videos/results/inputs/a red gondola lift in a mountainous region, with a beautiful sunset in the background.png" alt="a red gondola lift in a mountainous region, with a beautiful sunset in the background" width="64">
+                      </span>
+
+                      <span class="pill scene-pill" data-value="a red car driving down a country road with a grassy field on the side" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                          <img class="thumbnail-img" src="videos/results/inputs/a red car driving down a country road with a grassy field on the side.png" alt="a red car driving down a country road with a grassy field on the side" width="64">
+                      </span>
+
+                      <span class="pill scene-pill" data-value="a robot standing in a desolate, futuristic city" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                          <img class="thumbnail-img" src="videos/results/inputs/a robot standing in a desolate, futuristic city.png" alt="a robot standing in a desolate, futuristic city" width="64">
+                      </span>
+
+                      <span class="pill scene-pill" data-value="a serene snowy landscape with a still lake surrounded by snow-covered trees and mountains in the background" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                          <img class="thumbnail-img" src="videos/results/inputs/a serene snowy landscape with a still lake surrounded by snow-covered trees and mountains in the background.png" alt="a serene snowy landscape with a still lake surrounded by snow-covered trees and mountains in the background" width="64">
+                      </span>
+
+
+                  </div>
+
+                  <script>
+                      activeMethodPill = document.querySelector('.method-pill.active-pill');
+                      activeScenePill = document.querySelector('.scene-pill.active-pill');
+                      activeModePill = document.querySelector('.mode-pill.active-pill');
+                  </script>
+              </div>
+
+          </div>
+          <div class="col-2"></div>
+      </div>
+  </div>
+
+
+  <div class="container-fluid bg-secondary text-white">
+      <div class="row py-5 align-item-center">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 text-center h-100">
+              <h2 class=""><b> Method Overview</b></h2>
+              <img src="images/pipeline.png" class="img-fluid pb-3" alt="Explanation Overview">
+
+                  <h3 style="font-size: 18px; font-weight: normal;">
+                  <b>Pipeline of Imagine360.</b> Given perspective anchor video guidance, <strong><em>Imagine360 </em></strong> leverages a dual-branch video noising structure, with parallelled panorama and perspective branches to denoise 360° videos with plausible panoramic patterns. 
+                  Additionally, we devise the cross-domain spherical attention to capture long-range dependencies for reversed antipodal motion. 
+                  Finally, we introduce elevation-aware designs to handle general video inputs of changing elevations.      
+                  </h3>
+
+          </div>
+          <div class="col-md-2"></div>
+      </div>
+
+
+          <div class="col-md-2"></div>
+      </div>
+  </div>
+
+
+
+      <div class="container-fluid">
+        <div class="row py-3 align-item-center">
+          <div class="col-md-1"></div>
+          <div class="col-md-10 text-center h-100">
+          <h2 class=""><b>Additional Results(Panorama video and Multi-view Projections)</b></h2>
+
+            <div class="gallery-container">
+              <span class="arrow arrow-left" onclick="scrollGallery('gallery1', -300)">&#10094;</span>
+
+              <div id="gallery1" class="gallery">
+
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a white SUV driving down a dirt road in a forested mountain valley_sora.mp4" controls></video>
+                  <p>a white SUV driving down a dirt road in a forested mountain valley </p>
+                </div>
+
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/Santa Claus walking through a snowy forest at night.mp4" controls></video>
+                  <p>Santa Claus walking through a snowy forest at night</p>
+                </div>
+
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a busy street in London with many people walking down the street.mp4" controls></video>
+                  <p>a busy street in London with many people walking down the street</p>
+                </div>
+
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a beautiful beach with crashing waves and a forested cliff in the background.mp4" controls></video>
+                  <p>a beautiful beach with crashing waves and a forested cliff in the background</p>
+                </div>
+
+
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a colorful coral reef with a school of small fish swimming above it.mp4" controls></video>
+                  <p>a colorful coral reef with a school of small fish swimming above it</p>
+                </div>
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a large fountain in a city square surrounded by many buildings.mp4" controls></video>
+                  <p>a large fountain in a city square surrounded by many buildings</p>
+                </div>
+
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a monkey sitting in a pool of water.mp4" controls></video>
+                  <p>a monkey sitting in a pool of water</p>
+                </div>
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a large polar bear standing on a snow-covered mound in a winter forest.mp4" controls></video>
+                  <p>a large polar bear standing on a snow-covered mound in a winter forest</p>
+                </div>
+
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a picturesque canal in Venice, Italy with a gondola gliding through the water.mp4" controls></video>
+                  <p>a picturesque canal in Venice, Italy with a gondola gliding through the water</p>
+                </div>
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a river winding through a forested valley with the aurora borealis visible in the sky.mp4" controls></video>
+                  <p>a river winding through a forested valley with the aurora borealis visible in the sky</p>
+                </div>
+
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a snow-covered log cabin in a forest.mp4" controls></video>
+                  <p>a snow-covered log cabin in a forest</p>
+                </div>
+
+
+
+
+                <div class="gallery-item">
+                  <video src="videos/results/more_results/a traditional French town with half-timbered houses and a cobbled street..mp4" controls></video>
+                  <p>a traditional French town with half-timbered houses and a cobbled street</p>
+                </div>
+
+
+
+
+              </div>
+              <span class="arrow arrow-right" onclick="scrollGallery('gallery1', 300)">&#10095;</span>
+          </div>
+            <div class="pagination-dots"></div>
+          </div>
         </div>
-    </section> -->
+      </div>
 
+      <style>
+        .bg-customcustom {
+            background-color: #000000cd; 
+        }
+        pre, code {
+            background-color: transparent; 
+            color: #fff; 
+        }
+      </style>
 
-<!-- 
-<section class="section">
-    <div class="container is-clipped">
-        <div id="slider2" class="custom-slider">
-            <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/56_30/f-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Grass and flowers growing from the hair slowly, bees flying slowly</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/46_35_case2/ab-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The skull in a hood slowly standing up from the water, very smooth transition, dark</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/14_35/ab-0-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A man rides on a huge fish, flying from the water into the sky, sunset</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/47_35/a-5-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Half of the face turns into cyborg face, robot eye, titanium skull</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/k1/k1-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Forest in fire, a ghost appears</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/8_40/ab-3-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A green ghost is slowly walking from the distance, on a halloween street, bats are flying in the sky</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/106/ab-bc-cd-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The head of woman become a tiger head, woman with a tiger head look at viewer, tiger fade out, changing into a cyperpunk tiger, blue light, slowly</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/k3/k3-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Black humanoid raise hand slowly, blue lightening</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/55_30/ab-3-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>From winter to spring, rotate, zoom in, smooth transition, wide range view</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/126/ab-2-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Zoom in, comic, slowly</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/k2/k2-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Tiger becomes cyberpunk-style tiger</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/k4/k4-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Girl in green jacket walks closer</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/42_25/ab-3-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>The kawaii squirrel is surfing to the beach, slow and smooth transition,tropical, rainbow</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/k5/k5-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Unicorn running, becoming oil painting style</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/k6/k6-watermark.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A huge whale jumps out of water</div></div></div></div>
+      <div class="container-fluid pt-5">
+        <div class="row py-5 mt-5 bg-customcustom">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <h1 class="text-center text-white pb-2"><b>Citation</b></h1>
+                <p class="text-white">
+                    <pre><code class="text-white">
+                      @article{tan2024imagine360,
+                        title={Imagine360: Immersive 360 Video Generation from Perspective Anchor},
+                        author={Tan, Jing and Yang, Shuai and Wu, Tong and He, Jingwen and Guo, Yuwei and Liu, Ziwei and Lin, Dahua},
+                        journal={arXiv preprint arXiv:2412.03552},
+                        year={2024}
+                      }
+                    </code></pre>
+                </p>
+            </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
-</section>
- -->
 
 
 
+    <div class="container-fluid">
+      <div class="center-text">
+        <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=050404&w=300&t=tt&d=G1Z8LlfDzVSJNsCCsFKtN_qV96kTLuOgPt_IeJDdBRE&co=ffffff&ct=000000'></script>
+          </div>
+  </div>
 
 
-
-<!-- 
-<div style="border: #ffffff 20px solid;"></div>
-
-<section class="hero">
-    <div class="hero-body-subtitle-light"  style="display: block">
-        <div class="columns is-centered has-text-centered">
-            <div class="container is-max-maxwidth">
-                <div class="title is-2 sansfont" style="font-family:'Acme';color:#595959; font-size: 68px;">
-                    Gallery
-                </div>
-                <div class="note-font"style="margin-top: -10pt; font-style: italic;">
-                    *generated with instructions provided by our users
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section> -->
-
-<!-- <div style="border: #999999 1px solid;"></div> -->
-
-
-<!-- <section class="section">
-    <div class="container is-clipped">
-        <div id="slider3" class="custom-slider2">
-            
-            <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/1.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Robots are walking and searching through the rubble. science fiction.</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/7.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>An girl quitely look at the camera, smiling and winking.</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/11.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A man is riding a horse. style of chinese painting.</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/2.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A mechanical spider is crawling. science fiction.</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/4.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>An anime girl piloting a spaceship.</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/10.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>Machine is moving.</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/3.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>An anime girl is flying a plane.</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/5.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A spaceship is slowly descending.</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/6.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>An anime girl piloting a spaceship.</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/8.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A knight looks at the camera and smiles.</div></div></div></div> <div class='card-0'><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/9.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>An girl in a woolly hat is smiling.</div></div></div><div class='card card-1'><div class='card-image'><video class='lazy' autoplay loop muted width='100%'><source data-src='videos/gallery_1227/12.mp4' type='video/mp4'></video></div><div class='card-content'><div class='prompt'>A man is riding a horse. style of chinese painting.</div></div></div></div>
-            
-            <div class='card-0'>
-                <div class='card card-1'>
-                    <div class='card-image'>
-                        <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/1121-1/a-watermark.mp4' type='video/mp4'></video>
-                    </div>
-                    <div class='card-content'>
-                        <div class='prompt'>A beautiful woman with long golden hair is driving a red convertible sports car</div>
-                    </div>
-                </div>
-                <div class='card card-1'>
-                    <div class='card-image'>
-                        <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/1121-4/a-watermark.mp4' type='video/mp4'></video>
-                    </div>
-                    <div class='card-content'>
-                        <div class='prompt'>A fiery humanoid monster with flames burning</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class='card-0'>
-                <div class='card card-1'>
-                    <div class='card-image'>
-                        <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/1121-3/a-watermark.mp4' type='video/mp4'></video>
-                    </div>
-                    <div class='card-content'>
-                        <div class='prompt'>A man and a woman performing a social dance</div>
-                    </div>
-                </div>
-                <div class='card card-1'>
-                    <div class='card-image'>
-                        <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/1121-3/b-watermark.mp4' type='video/mp4'></video>
-                    </div>
-                    <div class='card-content'>
-                        <div class='prompt'>A man and a woman performing a social dance</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class='card-0'>
-                <div class='card card-1'>
-                    <div class='card-image'>
-                        <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/1121-2/a-watermark.mp4' type='video/mp4'></video>
-                    </div>
-                    <div class='card-content'>
-                        <div class='prompt'>A man wearing a cowboy outfit and a black hat kisses a woman with long golden hair wearing a red dress</div>
-                    </div>
-                </div>
-                <div class='card card-1'>
-                    <div class='card-image'>
-                        <video class='lazy' autoplay loop muted width='100%'><source data-src='videos/1121-5/a-watermark.mp4' type='video/mp4'></video>
-                    </div>
-                    <div class='card-content'>
-                        <div class='prompt'>The moon ascends in the background, bringing nightfall around an anime girl</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section> -->
-
-
-
-
-
-
-<footer class="footer" style="padding: 2em;">
-    <div class="content has-text-centered">
-      <p>
-        <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-      </p>
-    </div>
-  </footer>
 
 </body>
-
 </html>
