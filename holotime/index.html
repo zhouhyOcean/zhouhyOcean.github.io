@@ -86,7 +86,11 @@
           video { 
             height: auto; 
         }
-
+        .racing-sans-one-regular {
+          font-family: "Racing Sans One", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+        }
 
 
     </style>
@@ -155,12 +159,12 @@
     <meta property="og:image:height" content="576">
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ys-imtech.github.io/projects/Imagine360/"/>
-    <meta property="og:title" content="Imagine360: Immersive 360 Video Generation from Perspective Anchor" />
+    <meta property="og:title" content="HoloTime: Taming Video Diffusion Models for Panoramic 4D Scene Generation" />
     <meta property="og:description" content="Imagine360 lifts standard perspective video into 360◦ video, enabling dynamic scene exploration from full 360 degrees.“
     ."/>
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Imagine360: Immersive 360 Video Generation from Perspective Anchor" />
+    <meta name="twitter:title" content="HoloTime: Taming Video Diffusion Models for Panoramic 4D Scene Generation" />
     <meta name="twitter:description" content="Imagine360 lifts standard perspective video into 360◦ video, enabling dynamic scene exploration from full 360 degrees."/>
     <meta name="twitter:image" content="images/teaser.png" />
 
@@ -187,7 +191,9 @@
 
     <script src="js/app.js"></script>
     <script src="js/synced_video_selector.js"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
 </head>
 
 <body style="padding: 0%; width: 100%">
@@ -200,7 +206,10 @@
         <div class="flex-center-container"> <!-- New container for flexbox centering -->
             <div class="content">
                 <!-- <h1 style="font-size: 48px;"><b>Imagine360: Immersive 360 Video Generation from Perspective Anchor</b></h1> -->
-                <h1 style="font-size: 2.5vw;"><b>Imagine360: Immersive 360 Video Generation from Perspective Anchor</b></h1>
+                <h1 class="racing-sans-one-regular" style="font-size: 5em; font-weight: bold; text-shadow: 2px 2px 4px #000000;"><b>HoloTime</b></h1>
+                <h1 style="font-size: 5em; font-weight: bold; text-shadow: 2px 2px 4px #000000;"><b>HoloTime</b></h1>
+                
+                <!--<h1 style="font-size: 2.5vw;"><b>Imagine360: Immersive 360 Video Generation from Perspective Anchor</b></h1> -->
 
                 <p class="title is-5 mt-2 authors"> 
                     <a href="https://sparkstj.github.io/" target="_blank">Jing Tan</a><sup>1*</sup>, 
@@ -309,7 +318,7 @@
     
         <div class="video-background">
             <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-                <source src="videos/teaser/teaser.mp4" type="video/mp4">
+                <source src="vis/teaser.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="flex-center-container"> 
