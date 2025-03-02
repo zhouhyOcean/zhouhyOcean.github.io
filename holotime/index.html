@@ -24,100 +24,48 @@
 <body>
 
 <section class="hero">
-    <div class="hero-body-background">
-        <div class="hero-body-background-div"></div>
-        <div style="text-align: center; z-index: 1; margin-top: 60px">
-            <!-- <p class="sansfont acmefont shadowtext make-font" style="color: #FFFFFF; display: inline; margin-right: 20pt; font-weight: 600">Make</p> -->
-            <p class="title" style="font-family: Arial, sans-serif; font-weight: bold; text-shadow: 2px 2px 4px #000000; color: #FFFFFF; font-size: 4em;">
-                HoloTime
-            </p>
-            <p class="subtitle" style="font-family: Arial, sans-serif; font-weight: bold; text-shadow: 2px 2px 4px #000000; color: #FFFFFF; font-size: 2em;">
-                Taming Video Diffusion Models for Panoramic 4D Scene Generation
-            <!-- <p class="author-block sansfont shadowtext" style="color: #FFFFFF; font-size: 1.8em;">
-                CVPR 2024 <p class="acmefont shadowtext high-font" style="color: #FFFFFF;">
-            </p> -->
-        </div>
-        <div class="columns is-centered" style="z-index: 1; margin-top: -80px">
-            <div class="column has-text-centered ">
-                <!--<div class="publication-authors shadowtext authors-font" style="color: #FFFFFF;font-weight: bold;font-family:DMSerifText;">
-                    <span class="author-block sansfont">Renjie Li<sup>1,4</sup>&nbsp;&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont">Panwang Pan<sup>1</sup>&nbsp;&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont">Bangbang Yang<sup>1</sup>&nbsp;&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont">Dejia Xu<sup>2</sup>&nbsp;&nbsp;&nbsp;</span> 
-                    <span class="author-block sansfont">Shijie Zhou<sup>3</sup>&nbsp;&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont">Xuanyang Zhang<sup>1</sup>&nbsp;&nbsp;&nbsp;</span><br>
-                    <span class="author-block sansfont">Zeming Li<sup>1</sup>&nbsp;&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont">Achuta Kadambi<sup>3</sup>&nbsp;&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont">Zhangyang Wang<sup>2</sup>&nbsp;&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont">Zhengzhong Tu<sup>4</sup>&nbsp;&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont">Zhiwen Fan<sup>2</sup>&nbsp;&nbsp;&nbsp;</span>
-                </div>
+    <div class="relative w-full h-[70vh] overflow-hidden">
+                <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover" src="public/videos/show/title.mp4"></video>
+                <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+                <div class="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 space-y-6">
+                    <h1 class="text-5xl md:text-6xl font-bold text-center">DynamicScaler</h1>
+                    <p class="text-xl md:text-2xl text-center">Seamless and Scalable Video Generation for Panoramic Scenes</p>
+                    <div class="text-center space-y-4">
+                        <div class="flex flex-wrap justify-center gap-x-2 text-lg">
+                            <span class="font-medium">
+                                Jinxiu Liu<sup>*</sup>
+                                ,
 
-                <div class="publication-authors shadowtext authors-font" style="color: #FFFFFF;font-weight: bold;font-family:DMSerifText; margin-bottom: 4pt;">
-                    <span class="author-block sansfont"><sup>1</sup>Pico </span>
-                    <span class="author-block sansfont">&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont"><sup>2</sup>UT Austin </span>
-                    <span class="author-block sansfont">&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont"><sup>3</sup>UCLA </span>
-                    <span class="author-block sansfont">&nbsp;&nbsp;</span>
-                    <span class="author-block sansfont"><sup>4</sup>TAMU </span>
-                </div> -->
-
-                <div class="column has-text-centered" style="font-family:DMSerifText">
-                    <div class="publication-links">
-                        <span class="link-block">
-                            <a href="http://arxiv.org/abs/2406.13527" class="external-link button is-normal is-rounded light-btn btn-font">
-                            <span class="icon">
-                                <i class="fas fa-file-pdf"></i>
                             </span>
-                            <span class="sansfont">Paper</span>
-                            </a>
-                        </span>
+                            <span class="font-medium">
+                                Shaoheng Lin<sup>*</sup>
+                                ,
 
-                        <span class="link-block">
-                            <a href="index.html" class="external-link button is-normal is-rounded light-btn btn-font">
-                            <span class="icon">
-                                <i class="fa-brands fa-youtube"></i>
                             </span>
-                            <span class="sansfont">YouTube</span>
-                            </a>
-                        </span>
-
-                        <span class="link-block">
-                            <a href="index.html" class="external-link button is-normal is-rounded light-btn btn-font">
-                            <span class="icon">
-                                <i class="fa-brands fa-bilibili"></i>
+                            <span class="font-medium">Yinxiao Li,
+</span>
+                            <span class="font-medium">
+                                Ming-Hsuan Yang<sup>†</sup>
                             </span>
-                            <span class="sansfont">Bilibili</span>
-                            </a>
-                        </span>
-
-                        <span class="link-block">
-                            <a href="static/assets/bib.txt" class="external-link button is-normal is-rounded light-btn btn-font">
-                            <span class="icon">
-                                <i class="fa fa-quote-left"></i>
-                            </span>
-                            <span class="sansfont">Cite</span>
-                            </a>
-                        </span>
-
-                        <!-- <span class="link-block">
-                            <a href="demo.html" class="external-link button is-normal is-rounded light-btn btn-font">
-                            <span class="icon">
-                                <i class="fa-solid fa-desktop"></i>
-                            </span>
-                            <span class="sansfont">Demo</span>
-                            </a>
-                        </span> -->
-
+                        </div>
+                        <div class="text-sm space-y-1">UC Merced • Google DeepMind • SCUT
+</div>
+                        <div class="text-sm space-y-1">(* Equal Contribution, † Corresponding Author)
+</div>
                     </div>
-
+                    <div class="flex flex-wrap justify-center gap-4 mt-8">
+                        <a href="https://arxiv.org/abs/2412.11100" target="_blank" class="inline-flex items-center px-4 py-2 border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 border-transparent text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                            </svg>
+                            Paper
+ 
+                        </a>
+                    </div>
                 </div>
-
+                <div class="absolute bottom-4 right-4 z-10 text-white bg-black bg-opacity-50 px-4 py-2 rounded-md text-sm">It may take few moments to load the videos, please wait patiently :)
+</div>
             </div>
-        </div>
-
-    </div>
     </div>
 </section>
 
