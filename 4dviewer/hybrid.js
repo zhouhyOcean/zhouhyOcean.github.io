@@ -590,6 +590,11 @@ async function main() {
 
   //camera.addEventListener("objectChanged", onCameraChange)
 
+  const preventDefault = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  
   const onMouseDown = e => {
       preventDefault(e)
 
@@ -885,10 +890,6 @@ async function main() {
     } catch (err) {}
   });
 
-  const preventDefault = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
   document.addEventListener("dragenter", preventDefault);
   document.addEventListener("dragover", preventDefault);
   document.addEventListener("dragleave", preventDefault);
