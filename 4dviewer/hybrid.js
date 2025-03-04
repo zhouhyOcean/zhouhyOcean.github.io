@@ -594,7 +594,7 @@ async function main() {
     e.preventDefault();
     e.stopPropagation();
   };
-  
+
   const onMouseDown = e => {
       preventDefault(e)
 
@@ -794,7 +794,7 @@ async function main() {
 
   const frame = (now) => {
     
-    if (window.currentSplatName !== lastName) {
+    if (window.currentSplatName !== lastName && window.currentSplatName.endsWith(".ply")) {
       setVertexData(window.currentSplatName, chunkHandler);
       lastName = window.currentSplatName;
     }
