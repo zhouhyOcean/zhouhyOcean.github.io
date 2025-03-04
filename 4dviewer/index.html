@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
     <link rel="stylesheet" href="static/css/app.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <script type="module">
+      import { createSplatView, setSplatScene, setupCarousel } from "splats.js"
+      setupCarousel(createSplatView("loading"), document.querySelector("#splat-carousel"));
+    </script>
     <style>
       body {
         overflow: hidden;
@@ -150,6 +154,19 @@
         z-index: 999;
         right: 10px;
       }
+      #loading {
+        position: fixed; /* 固定定位，使其始终在视口内 */
+        top: 50%; /* 距离顶部 50% */
+        left: 50%; /* 距离左侧 50% */
+        transform: translate(-50%, -50%); /* 向左和向上移动自身宽度和高度的 50% */
+        text-align: center; /* 文本水平居中 */
+        font-size: 1.5rem; /* 字体大小，可以根据需要调整 */
+        color: white; /* 字体颜色 */
+        background-color: rgba(0, 0, 0, 0.7); /* 背景颜色，半透明 */
+        padding: 20px; /* 内边距，让文本有空间 */
+        border-radius: 10px; /* 圆角边框 */
+        z-index: 1000; /* 确保显示在其他内容之上 */
+      }
       #canvas {
         display: block; /* 确保canvas不会换行 */
         position: absolute; /* 使用绝对定位 */
@@ -204,6 +221,11 @@
     <div id="progress"></div>
 
     <div id="message"></div>
+    <!-- 一行比较大的文本，“Loading Model”居中显示 -->
+    <div id="loading">
+      <p>Loading Model... Please wait.</p>
+    </div>
+      
     <div class="scene" id="spinner">
       <div class="cube-wrapper">
         <div class="cube">
@@ -232,45 +254,11 @@
     <div class="splat-carousel position-relative" id="splat-carousel" role="group" aria-relevant="additions text"
       style="position: fixed; bottom: 0; margin: 0 auto; width: 80%; z-index: 1000; background: rgba(0, 0, 0, 0); padding: 10px 0;">
         <div class="splat-carousel-items">
-            <div class="splat-carousel-item">
-                <img class="card-img" src="static/vis/pipeline.png" alt="Image 1">
-            </div>
-            <div class="splat-carousel-item">
-                <img class="card-img" src="static/vis/pipeline.png" alt="Image 2">
-            </div>
-            <div class="splat-carousel-item">
-                <img class="card-img" src="static/vis/pipeline.png" alt="Image 3">
-            </div>
-            <div class="splat-carousel-item">
-              <img class="card-img" src="static/vis/pipeline.png" alt="Image 4">
-            </div>
-            <div class="splat-carousel-item">
-                <img class="card-img" src="static/vis/pipeline.png" alt="Image 5">
-            </div>
-            <div class="splat-carousel-item">
-                <img class="card-img" src="static/vis/pipeline.png" alt="Image 6">
-            </div>
-            <div class="splat-carousel-item">
-              <img class="card-img" src="static/vis/pipeline.png" alt="Image 7">
-            </div>
-            <div class="splat-carousel-item">
-                <img class="card-img" src="static/vis/pipeline.png" alt="Image 8">
-            </div>
-            <div class="splat-carousel-item">
-              <img class="card-img" src="static/vis/pipeline.png" alt="Image 9">
-            </div>
+          <div id="splat-carousel-prototype">
               <div class="splat-carousel-item">
-                <img class="card-img" src="static/vis/pipeline.png" alt="Image 10">
-            </div>
-            <div class="splat-carousel-item">
-              <img class="card-img" src="static/vis/pipeline.png" alt="Image 11">
-            </div>
-            <div class="splat-carousel-item">
-                <img class="card-img" src="static/vis/pipeline.png" alt="Image 12">
-            </div>
-            <div class="splat-carousel-item">
-                <img class="card-img" src="static/vis/pipeline.png" alt="Image 13">
-            </div>
+                  <img class="card-img" style="user-drag: none;pointer-events: none; user-select:none;" src="">
+              </div>
+          </div>
         </div>
         <div class="splat-carousel-buttons">
             <button class="splat-carousel-button left">&#8249;</button>

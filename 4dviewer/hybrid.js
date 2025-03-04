@@ -892,11 +892,11 @@ async function main() {
   };
 
   //const url = params.get("url") ? new URL(params.get("url"), "https://huggingface.co/cakewalk/splat-data/resolve/main/") : "model.splatv";
-  const url = new URL("flame.splatv", "https://huggingface.co/cakewalk/splat-data/resolve/main/");
-  const req = await fetch(url, { mode: "cors", credentials: "omit" });
-  if (req.status != 200) throw new Error(req.status + " Unable to load " + req.url);
+  //const url = new URL("flame.splatv", "https://huggingface.co/cakewalk/splat-data/resolve/main/");
+  //const req = await fetch(url, { mode: "cors", credentials: "omit" });
+  //if (req.status != 200) throw new Error(req.status + " Unable to load " + req.url);
 
-  await readChunks(req.body.getReader(), [{ size: 8, type: "magic" }], chunkHandler);
+  //await readChunks(req.body.getReader(), [{ size: 8, type: "magic" }], chunkHandler);
 }
 
 main().catch((err) => {
@@ -1071,3 +1071,15 @@ function translate4(a, x, y, z) {
     a[3] * x + a[7] * y + a[11] * z + a[15],
   ];
 }
+
+// 设置一个可以在别的文件调用的方法，来更换vertex数据
+async function setVertexData(filename) {
+  vertexcount
+  const url = new URL("filename", "https://huggingface.co/cakewalk/splat-data/resolve/main/");
+  const req = await fetch(url, { mode: "cors", credentials: "omit" });
+  if (req.status != 200) throw new Error(req.status + " Unable to load " + req.url);
+
+  await readChunks(req.body.getReader(), [{ size: 8, type: "magic" }], chunkHandler);
+}
+
+export {setVertexData}
