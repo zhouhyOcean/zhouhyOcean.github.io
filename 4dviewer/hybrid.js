@@ -684,6 +684,8 @@ async function main() {
       console.log('open:', openTime);
     }
   });
+
+  // 设置一个监听器，一旦window.currentSplatName发生变化，就会触发这个监听器
   
   const lerp = (a, b, t) => {
       return (1 - t) * a + t * b
@@ -737,6 +739,7 @@ async function main() {
   let lastFrame = 0;
   let avgFps = 0;
   let start = 0;
+  let lastName = "";
 
   window.addEventListener("gamepadconnected", (e) => {
     const gp = navigator.getGamepads()[e.gamepad.index];
@@ -749,6 +752,11 @@ async function main() {
   let leftGamepadTrigger, rightGamepadTrigger;
 
   const frame = (now) => {
+    
+    if (window.currentSplatName !== lastName) {
+      setVertexData(window.currentSplatName, chunkHandler);
+      lastName = window.currentSplatName;
+    }
     
     update();
     // 打印camera的position和rotation
@@ -947,6 +955,7 @@ async function readChunks(reader, chunks, handleChunk) {
     handleChunk(chunk, buffer.buffer, buffer.byteLength - offset, chunks);
   }
   if (chunk) handleChunk(chunk, buffer.buffer, 0, chunks);
+  window.loadend = Date.now();
 }
 
 function getProjectionMatrix(fx, fy, width, height) {
@@ -1073,7 +1082,7 @@ function translate4(a, x, y, z) {
 }
 
 // 设置一个可以在别的文件调用的方法，来更换vertex数据
-async function setVertexData(filename) {
+async function setVertexData(filename, chunkHandler) {
   //vertexcount
   const url = new URL(filename, "https://huggingface.co/datasets/Marooooo/HoloTime_results/resolve/main/");
   const req = await fetch(url, { mode: "cors", credentials: "omit" });

@@ -75,7 +75,15 @@ export async function setSplatScene(name, view) {
     //const rotation = new SPLAT.Vector3(Math.PI - Math.PI / 20.0, Math.PI, 0);
     //splat.rotation = SPLAT.Quaternion.FromEuler(rotation);
     //splat.applyRotation();
-    setVertexData(name);
+    //setVertexData(name);
+
+    // 设置一个整个页面的全局变量，用于存储当前的splat的名字
+    window.currentSplatName = name;
+    loadstart = new Date();
+    // 等待数据加载完成，直到window.loadend晚于loadstart
+    while (window.loadend < loadstart) {
+        await new Promise(r => setTimeout(r, 100));
+    }
 
     view.progress.style.display = 'none';
     // Not sure if these are meant to be public, but it's javascript anything goes :)
