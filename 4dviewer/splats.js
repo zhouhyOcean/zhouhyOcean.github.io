@@ -1,6 +1,6 @@
 
-import { OrbitControls } from "OrbitControls.js";
-import { setVertexData } from "hybrid.js";
+//import { OrbitControls } from "OrbitControls.js";
+import { setVertexData } from "./hybrid.js";
 
 import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
 const bucket = "https://storage.googleapis.com/mf_gaussian_splats"
