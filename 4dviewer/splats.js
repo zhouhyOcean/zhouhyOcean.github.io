@@ -79,6 +79,7 @@ export async function setSplatScene(name, view) {
 
     // 设置一个整个页面的全局变量，用于存储当前的splat的名字
     window.currentSplatName = name;
+    window.loadend = view.lastClick;
     loadstart = new Date();
     // 等待数据加载完成，直到window.loadend晚于loadstart
     while (window.loadend < loadstart) {
