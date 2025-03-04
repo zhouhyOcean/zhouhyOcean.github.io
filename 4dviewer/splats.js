@@ -108,9 +108,7 @@ export async function setSplatScene(name, view) {
 export async function setupCarousel(carousel) {
     //let files = await listFolders();
 
-    files = [
-       '00', '01', '02', '03', '04', '05', '06', '07', '08', '09',
-    ]
+    files = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09'];
     shuffleArray(files);
 
     const prototype = carousel.querySelector("#splat-carousel-prototype");
