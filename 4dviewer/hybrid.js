@@ -744,7 +744,7 @@ async function main() {
   let lastFrame = 0;
   let avgFps = 0;
   let start = 0;
-  let lastName = "";
+  let lastName = undefined;
 
   window.addEventListener("gamepadconnected", (e) => {
     const gp = navigator.getGamepads()[e.gamepad.index];
@@ -794,7 +794,7 @@ async function main() {
 
   const frame = (now) => {
     
-    if (window.currentSplatName !== lastName && window.currentSplatName.endsWith(".ply")) {
+    if (window.currentSplatName !== lastName) {
       setVertexData(window.currentSplatName, chunkHandler);
       lastName = window.currentSplatName;
     }
