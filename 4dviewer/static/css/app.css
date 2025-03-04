@@ -293,7 +293,7 @@
     cursor: pointer;
     border-radius: 15px;
     margin: 5px;
-    min-width: 100px;
+    /*min-width: 100px; */
     /*max-width: 300px; */
     max-height: 150px;
     box-sizing: content-box;
