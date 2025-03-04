@@ -7,7 +7,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <style>
-      /* 现有样式 */
       body {
         overflow: hidden;
         margin: 0;
@@ -35,31 +34,85 @@
         font-size: small;
       }
 
+      .cube-wrapper {
+        transform-style: preserve-3d;
+      }
+
+      .cube {
+        transform-style: preserve-3d;
+        transform: rotateX(45deg) rotateZ(45deg);
+        animation: rotation 2s infinite;
+      }
+
+      .cube-faces {
+        transform-style: preserve-3d;
+        height: 80px;
+        width: 80px;
+        position: relative;
+        transform-origin: 0 0;
+        transform: translateX(0) translateY(0) translateZ(-40px);
+      }
+
+      .cube-face {
+        position: absolute;
+        inset: 0;
+        background: #0017ff;
+        border: solid 1px #ffffff;
+      }
+      .cube-face.top {
+        transform: translateZ(80px);
+      }
+      .cube-face.front {
+        transform-origin: 0 50%;
+        transform: rotateY(-90deg);
+      }
+      .cube-face.back {
+        transform-origin: 0 50%;
+        transform: rotateY(-90deg) translateZ(-80px);
+      }
+      .cube-face.right {
+        transform-origin: 50% 0;
+        transform: rotateX(-90deg) translateY(-80px);
+      }
+      .cube-face.left {
+        transform-origin: 50% 0;
+        transform: rotateX(-90deg) translateY(-80px) translateZ(80px);
+      }
+
       /* 轮播组件样式 */
       .carousel-container {
-        position: relative;
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        overflow: hidden;
+        position: absolute; /* 使用绝对定位 */
+        bottom: 0; /* 置于页面底部 */
+        width: 100%; /* 宽度占满屏幕 */
+        max-width: 100%; /* 最大宽度 */
+        margin: 0 auto; /* 水平居中 */
+        overflow: hidden; /* 隐藏超出部分 */
+        z-index: 1000; /* 确保浮于canvas上方 */
+        background: rgba(0, 0, 0, 0.8); /* 添加半透明背景 */
+        padding: 10px 0; /* 添加上下内边距 */
       }
+
       .carousel {
         display: flex;
         align-items: center;
         justify-content: center;
       }
+
       .carousel-inner {
         display: flex;
         transition: transform 0.5s ease;
       }
+
       .carousel-item {
         min-width: 100%;
         box-sizing: border-box;
       }
+
       .carousel-item img {
         width: 100%;
         display: block;
       }
+
       .carousel-control-prev,
       .carousel-control-next {
         position: absolute;
@@ -72,43 +125,134 @@
         cursor: pointer;
         z-index: 10;
       }
+
       .carousel-control-prev {
         left: 0;
       }
+
       .carousel-control-next {
         right: 0;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotateX(45deg) rotateY(0) rotateZ(45deg);
+          animation-timing-function: cubic-bezier(0.17, 0.84, 0.44, 1);
+        }
+        50% {
+          transform: rotateX(45deg) rotateY(0) rotateZ(225deg);
+          animation-timing-function: cubic-bezier(0.76, 0.05, 0.86, 0.06);
+        }
+        100% {
+          transform: rotateX(45deg) rotateY(0) rotateZ(405deg);
+          animation-timing-function: cubic-bezier(0.17, 0.84, 0.44, 1);
+        }
+      }
+
+      .scene,
+      #message {
+        position: absolute;
+        display: flex;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 2;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+      #message {
+        font-weight: bold;
+        font-size: large;
+        color: red;
+        pointer-events: none;
+      }
+
+      details {
+        font-size: small;
+      }
+
+      #progress {
+        position: absolute;
+        top: 0;
+        height: 5px;
+        background: blue;
+        z-index: 99;
+        transition: width 0.1s ease-in-out;
+      }
+
+      #quality {
+          position: absolute;
+          bottom: 80px; /* 距离顶部 10px */
+          z-index: 999;
+          right: 20px; /* 距离右侧 10px */
+          width: 150px; /* 增加宽度 */
+          font-size: 26px; /* 增大字体大小 */
+          text-align: right;
+          visibility: hidden;
+      }
+
+      #caminfo {
+        position: absolute;
+        top: 10px;
+        z-index: 999;
+        right: 10px;
+      }
+      #canvas {
+        display: block; /* 确保canvas不会换行 */
+        position: absolute; /* 使用绝对定位 */
+        top: 50%; /* 垂直居中 */
+        left: 50%; /* 水平居中 */
+        width: 100vw; /* 视口宽度的50% */
+        height: 100vh; /* 视口高度的50% */
+        transform: translate(-50%, -50%); /* 将canvas向左和向上移动自身尺寸的50%，以实现精确居中 */
+        touch-action: none; /* 禁止默认的触摸行为，如滚动和缩放 */
+        background-color: black; /* 设置背景颜色，如果需要的话 */
+      }
+      #toggleButton {
+        position: absolute;
+        bottom: 10px; /* 距离底部10px */
+        right: 20px; /* 距离右侧10px */
+        padding: 10px 20px; /* 按钮内边距 */
+        width: 120px; /* 增加宽度 */
+        height: 70px; /* 增加高度 */
+        font-size: 24px; /* 增大字体大小 */
+        cursor: pointer; /* 鼠标悬停时显示指针 */
+      }
+      #instructions {
+        background: rgba(0, 0, 0, 0.6);
+        white-space: pre-wrap;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: x-small;
+      }
+      body.nohf .nohf {
+        display: none;
+      }
+      body.nohf #progress,
+      body.nohf .cube-face {
+        background: #ff9d0d;
+      }
+
+      #enter {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10000;
+        padding: 10px;
+        display: none;
       }
     </style>
   </head>
   <body>
-    <!-- 轮播组件 -->
-    <div class="carousel-container" id="carouselContainer">
-      <div class="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="image1.jpg" alt="Image 1">
-          </div>
-          <div class="carousel-item">
-            <img src="image2.jpg" alt="Image 2">
-          </div>
-          <div class="carousel-item">
-            <img src="image3.jpg" alt="Image 3">
-          </div>
-        </div>
-        <button class="carousel-control-prev" id="carouselPrev">
-          <span>&#8249;</span>
-        </button>
-        <button class="carousel-control-next" id="carouselNext">
-          <span>&#8250;</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- 现有内容 -->
     <div id="info">
       <p></p>
     </div>
     <div id="progress"></div>
+
     <div id="message"></div>
     <div class="scene" id="spinner">
       <div class="cube-wrapper">
@@ -126,6 +270,7 @@
     </div>
     <canvas id="canvas"></canvas>
     <button id="toggleButton">Pause</button>
+
     <div id="quality">
       <span id="fps"></span>
     </div>
@@ -133,47 +278,31 @@
       <span id="camid"></span>
     </div>
 
+    <!-- 轮播组件 -->
+    <div class="carousel-container" id="carouselContainer">
+      <div class="carousel">
+        <div class="carousel-inner">
+          <!-- 轮播项 -->
+          <div class="carousel-item active">
+            <img src="image1.jpg" alt="Image 1">
+          </div>
+          <div class="carousel-item">
+            <img src="image2.jpg" alt="Image 2">
+          </div>
+          <div class="carousel-item">
+            <img src="image3.jpg" alt="Image 3">
+          </div>
+        </div>
+        <!-- 左右按钮 -->
+        <button class="carousel-control-prev" id="carouselPrev">
+          <span>&#8249;</span>
+        </button>
+        <button class="carousel-control-next" id="carouselNext">
+          <span>&#8250;</span>
+        </button>
+      </div>
+    </div>
+
     <script type="module" src="hybrid.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const carouselInner = document.querySelector(".carousel-inner");
-        const carouselItems = document.querySelectorAll(".carousel-item");
-        const carouselPrev = document.getElementById("carouselPrev");
-        const carouselNext = document.getElementById("carouselNext");
-        let currentIndex = 0;
-
-        function showCarouselItem(index) {
-          carouselInner.style.transform = `translateX(-${index * 100}%)`;
-          currentIndex = index;
-        }
-
-        carouselPrev.addEventListener("click", () => {
-          const newIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-          showCarouselItem(newIndex);
-        });
-
-        carouselNext.addEventListener("click", () => {
-          const newIndex = (currentIndex + 1) % carouselItems.length;
-          showCarouselItem(newIndex);
-        });
-
-        let autoPlayInterval;
-        function startAutoPlay() {
-          autoPlayInterval = setInterval(() => {
-            const newIndex = (currentIndex + 1) % carouselItems.length;
-            showCarouselItem(newIndex);
-          }, 3000);
-        }
-
-        function stopAutoPlay() {
-          clearInterval(autoPlayInterval);
-        }
-
-        carouselInner.addEventListener("mouseenter", stopAutoPlay);
-        carouselInner.addEventListener("mouseleave", startAutoPlay);
-
-        startAutoPlay();
-      });
-    </script>
   </body>
 </html>
