@@ -750,6 +750,42 @@ async function main() {
   });
 
   let leftGamepadTrigger, rightGamepadTrigger;
+  let lastVertexCount = -1;
+  const chunkHandler = (chunk, buffer, remaining, chunks) => {
+    if (!remaining && chunk.type === "magic") {
+      let intView = new Uint32Array(buffer);
+      if (intView[0] !== 0x674b) throw new Error("This does not look like a splatv file");
+      chunks.push({ size: intView[1], type: "chunks" });
+    } else if (!remaining && chunk.type === "chunks") {
+      for (let chunk of JSON.parse(new TextDecoder("utf-8").decode(buffer))) {
+        chunks.push(chunk);
+        if (chunk.type === "splat") {
+          cameras = chunk.cameras;
+          camera = chunk.cameras[0];
+          console.log("Camera Data", camera)
+          resize();
+        }
+      }
+    } else if (chunk.type === "splat") {
+      if (vertexCount > lastVertexCount || remaining === 0) {
+        lastVertexCount = vertexCount;
+        worker.postMessage({ texture: new Float32Array(buffer), remaining: remaining });
+        console.log("splat", remaining);
+
+        const texdata = new Uint32Array(buffer);
+        // console.log(texdata);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA32UI, chunk.texwidth, chunk.texheight, 0, gl.RGBA_INTEGER, gl.UNSIGNED_INT, texdata);
+      }
+    } else if (!remaining) {
+      console.log("chunk", chunk, buffer);
+    }
+  };
 
   const frame = (now) => {
     
@@ -862,42 +898,6 @@ async function main() {
     selectFile(e.dataTransfer.files[0]);
   });
 
-  let lastVertexCount = -1;
-  const chunkHandler = (chunk, buffer, remaining, chunks) => {
-    if (!remaining && chunk.type === "magic") {
-      let intView = new Uint32Array(buffer);
-      if (intView[0] !== 0x674b) throw new Error("This does not look like a splatv file");
-      chunks.push({ size: intView[1], type: "chunks" });
-    } else if (!remaining && chunk.type === "chunks") {
-      for (let chunk of JSON.parse(new TextDecoder("utf-8").decode(buffer))) {
-        chunks.push(chunk);
-        if (chunk.type === "splat") {
-          cameras = chunk.cameras;
-          camera = chunk.cameras[0];
-          console.log("Camera Data", camera)
-          resize();
-        }
-      }
-    } else if (chunk.type === "splat") {
-      if (vertexCount > lastVertexCount || remaining === 0) {
-        lastVertexCount = vertexCount;
-        worker.postMessage({ texture: new Float32Array(buffer), remaining: remaining });
-        console.log("splat", remaining);
-
-        const texdata = new Uint32Array(buffer);
-        // console.log(texdata);
-        gl.activeTexture(gl.TEXTURE0);
-        gl.bindTexture(gl.TEXTURE_2D, texture);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA32UI, chunk.texwidth, chunk.texheight, 0, gl.RGBA_INTEGER, gl.UNSIGNED_INT, texdata);
-      }
-    } else if (!remaining) {
-      console.log("chunk", chunk, buffer);
-    }
-  };
 
   //const url = params.get("url") ? new URL(params.get("url"), "https://huggingface.co/cakewalk/splat-data/resolve/main/") : "model.splatv";
   //const url = new URL("flame.splatv", "https://huggingface.co/cakewalk/splat-data/resolve/main/");
