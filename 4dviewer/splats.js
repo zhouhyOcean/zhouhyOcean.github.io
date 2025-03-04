@@ -64,7 +64,7 @@ export async function setSplatScene(name, view) {
     // Load and convert ply from url
     //view.progressDialog.show();
     //view.progressIndicator.value = 0.0;
-    view.progress.show();
+    view.progress.style.display = 'block';
 
     //const splat = await SPLAT.PLYLoader.LoadAsync(bucket + "/" + name, scene, (progress) => (view.progressIndicator.value = progress * 100));
 
@@ -77,7 +77,7 @@ export async function setSplatScene(name, view) {
     //splat.applyRotation();
     setVertexData(name);
 
-    view.progress.close();
+    view.progress.style.display = 'none';
     // Not sure if these are meant to be public, but it's javascript anything goes :)
     //var controls = new OrbitControls(camera, view.canvas, /*alpha=*/0.0, /*beta=*/0.0, /*radius=*/startRadius, /*enableKeyboardControls=*/false);
     //controls.minAngle = -10
