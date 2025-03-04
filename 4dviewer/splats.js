@@ -109,14 +109,14 @@ export async function setupCarousel(view, carousel) {
     //let files = await listFolders();
 
     let files = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09'];
-    shuffleArray(files);
+    //shuffleArray(files);
 
     const prototype = carousel.querySelector("#splat-carousel-prototype");
     const elements = Object.fromEntries(
         files.map(f => [f, prototype.firstElementChild.cloneNode(true)])
     );
 
-    async function onClickSplatThumb(view, splatName) {
+    async function onClickSplatThumb(splatName) {
         if (view.loading) {
             // Only allow one splat at a time to load otherwise things get messy.
             return;
@@ -155,7 +155,7 @@ export async function setupCarousel(view, carousel) {
             card.addEventListener("mouseup", function () {
                 console.log(Math.abs(itemsParent.scrollLeft - startScroll));
                 if (Math.abs(itemsParent.scrollLeft - startScroll) < 10) {
-                    onClickSplatThumb(view, file);
+                    onClickSplatThumb(file);
                 }
             });
 
