@@ -1074,7 +1074,7 @@ function translate4(a, x, y, z) {
 
 // 设置一个可以在别的文件调用的方法，来更换vertex数据
 async function setVertexData(filename) {
-  vertexcount
+  //vertexcount
   const url = new URL(filename, "https://huggingface.co/datasets/Marooooo/HoloTime_results/resolve/main/");
   const req = await fetch(url, { mode: "cors", credentials: "omit" });
   if (req.status != 200) throw new Error(req.status + " Unable to load " + req.url);
