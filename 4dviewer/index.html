@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="stylesheet" href="css/app.css">
     <style>
       body {
         overflow: hidden;
@@ -77,61 +78,6 @@
       .cube-face.left {
         transform-origin: 50% 0;
         transform: rotateX(-90deg) translateY(-80px) translateZ(80px);
-      }
-
-      /* 轮播组件样式 */
-      .carousel-container {
-        position: absolute; /* 使用绝对定位 */
-        bottom: 0; /* 置于页面底部 */
-        width: 100%; /* 宽度占满屏幕 */
-        max-width: 100%; /* 最大宽度 */
-        margin: 0 auto; /* 水平居中 */
-        overflow: hidden; /* 隐藏超出部分 */
-        z-index: 1000; /* 确保浮于canvas上方 */
-        background: rgba(0, 0, 0, 0.8); /* 添加半透明背景 */
-        padding: 10px 0; /* 添加上下内边距 */
-      }
-
-      .carousel {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .carousel-inner {
-        display: flex;
-        transition: transform 0.5s ease;
-      }
-
-      .carousel-item {
-        min-width: 100%;
-        box-sizing: border-box;
-      }
-
-      .carousel-item img {
-        width: 100%;
-        display: block;
-      }
-
-      .carousel-control-prev,
-      .carousel-control-next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        z-index: 10;
-      }
-
-      .carousel-control-prev {
-        left: 0;
-      }
-
-      .carousel-control-next {
-        right: 0;
       }
 
       @keyframes rotation {
@@ -279,28 +225,23 @@
     </div>
 
     <!-- 轮播组件 -->
-    <div class="carousel-container" id="carouselContainer">
-      <div class="carousel">
-        <div class="carousel-inner">
-          <!-- 轮播项 -->
-          <div class="carousel-item active">
-            <img src="image1.jpg" alt="Image 1">
-          </div>
-          <div class="carousel-item">
-            <img src="image2.jpg" alt="Image 2">
-          </div>
-          <div class="carousel-item">
-            <img src="image3.jpg" alt="Image 3">
-          </div>
+    <div class="splat-carousel position-relative" id="splat-carousel" role="group" aria-relevant="additions text"
+         style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.8); padding: 10px 0;">
+        <div class="splat-carousel-items">
+            <div class="splat-carousel-item">
+                <img class="card-img" src="vis/pipeline.png" alt="Image 1">
+            </div>
+            <div class="splat-carousel-item">
+                <img class="card-img" src="vis/pipeline.png" alt="Image 2">
+            </div>
+            <div class="splat-carousel-item">
+                <img class="card-img" src="vis/pipeline.png" alt="Image 3">
+            </div>
         </div>
-        <!-- 左右按钮 -->
-        <button class="carousel-control-prev" id="carouselPrev">
-          <span>&#8249;</span>
-        </button>
-        <button class="carousel-control-next" id="carouselNext">
-          <span>&#8250;</span>
-        </button>
-      </div>
+        <div class="splat-carousel-buttons">
+            <button class="splat-carousel-button left">&#8249;</button>
+            <button class="splat-carousel-button right">&#8250;</button>
+        </div>
     </div>
 
     <script type="module" src="hybrid.js"></script>
