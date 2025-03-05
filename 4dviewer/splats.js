@@ -186,6 +186,7 @@ export async function setupCarousel(view, carousel) {
             //        requestAnimationFrame(updateCardTransform);
             //    }
             //});
+            prototype.parentNode.appendChild(card);
         }
 
         setup(file);
