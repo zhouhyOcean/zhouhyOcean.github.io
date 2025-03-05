@@ -189,9 +189,12 @@ export async function setupCarousel(view, carousel) {
         }
 
         setup(file);
+
+        // 看看elements[file]是否是一个合法的元素
+        console.log(elements[file]);
     }
 
-    prototype.remove();
+    //prototype.remove();
 
     const itemsParent = carousel.getElementsByClassName("splat-carousel-items")[0];
     const items = [...itemsParent.getElementsByClassName('splat-carousel-item')];
