@@ -156,6 +156,8 @@ export async function setupCarousel(view, carousel) {
     for (var i = 0; i < files.length; ++i) {
         const file = files[i];
 
+        console.log("Setting up file: ", i);
+
         // Wrap in function to capture CURRENT file.
         // Js is bad :)
         function setup(file) {
