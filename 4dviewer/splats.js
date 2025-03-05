@@ -82,7 +82,7 @@ export async function setSplatScene(name, view) {
     window.loadend = view.lastClick;
     window.loadstart = new Date();
     // 等待数据加载完成，直到window.loadend晚于loadstart
-    while (window.loadend < window.loadstart) {
+    while (window.loadend <= window.loadstart) {
         await new Promise(r => setTimeout(r, 100));
     }
     console.log("splats loadstart: ", window.loadstart);
