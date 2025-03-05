@@ -190,7 +190,7 @@ export async function setupCarousel(view, carousel) {
 
         setup(file);
 
-        // 看看elements[file]是否是一个合法的元素
+        // 看看elements[file]是否是一个合法的元素00
         console.log(elements[file]);
     }
 
