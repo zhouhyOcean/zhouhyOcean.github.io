@@ -956,7 +956,7 @@ async function readChunks(reader, chunks, handleChunk) {
     handleChunk(chunk, buffer.buffer, buffer.byteLength - offset, chunks);
   }
   if (chunk) handleChunk(chunk, buffer.buffer, 0, chunks);
-  window.loadend = Date.now();
+
 }
 
 function getProjectionMatrix(fx, fy, width, height) {
@@ -1084,12 +1084,29 @@ function translate4(a, x, y, z) {
 
 // 设置一个可以在别的文件调用的方法，来更换vertex数据
 async function setVertexData(filename, chunkHandler) {
-  //vertexcount
   const url = new URL(filename, "https://huggingface.co/datasets/Marooooo/HoloTime_results/resolve/main/");
   const req = await fetch(url, { mode: "cors", credentials: "omit" });
   if (req.status != 200) throw new Error(req.status + " Unable to load " + req.url);
-
-  await readChunks(req.body.getReader(), [{ size: 8, type: "magic" }], chunkHandler);
+  
+  const reader = req.body.getReader();
+  const chunks = [];
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+  }
+  
+  const splatData = new Uint8Array(chunks.reduce((total, chunk) => total + chunk.length, 0));
+  let offset = 0;
+  for (const chunk of chunks) {
+    splatData.set(chunk, offset);
+    offset += chunk.length;
+  }
+  if (splatData[0] == 112 && splatData[1] == 108 && splatData[2] == 121 && splatData[3] == 10) {
+    // ply file magic header means it should be handled differently
+    worker.postMessage({ ply: splatData.buffer });
+  }
+  window.loadend = Date.now();
 }
 
 export {setVertexData}
