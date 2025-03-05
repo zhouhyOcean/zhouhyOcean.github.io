@@ -85,6 +85,7 @@ export async function setSplatScene(name, view) {
     while (window.loadend < window.loadstart) {
         await new Promise(r => setTimeout(r, 100));
     }
+    console.log("splats loadend: ", window.loadend);
 
     view.progress.style.display = 'none';
     // Not sure if these are meant to be public, but it's javascript anything goes :)
