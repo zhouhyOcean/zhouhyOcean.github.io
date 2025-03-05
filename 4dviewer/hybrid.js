@@ -1104,9 +1104,11 @@ async function setVertexData(filename, chunkHandler) {
   }
   if (splatData[0] == 112 && splatData[1] == 108 && splatData[2] == 121 && splatData[3] == 10) {
     // ply file magic header means it should be handled differently
+    console.log('processing ply file');
     worker.postMessage({ ply: splatData.buffer });
   }
   window.loadend = Date.now();
+  console.log('loadend:', window.loadend);
 }
 
 export {setVertexData}
