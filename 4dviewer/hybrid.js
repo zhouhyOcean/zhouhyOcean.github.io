@@ -1094,6 +1094,7 @@ async function setVertexData(filename, chunkHandler) {
     const { done, value } = await reader.read();
     if (done) break;
     chunks.push(value);
+    console.log('loading...');
   }
   
   const splatData = new Uint8Array(chunks.reduce((total, chunk) => total + chunk.length, 0));
