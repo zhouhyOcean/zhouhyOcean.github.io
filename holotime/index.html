@@ -249,33 +249,6 @@
     </div>
     <div class="mobile-content">
         <div class="container-fluid h-100 h-md-100 w-100 d-flex flex-column justify-content-center text-center my-5" style="height:100vh;">
-            <div class="row justify-content-center mb-3 order-md-first">
-                <div class="col-12">
-
-                    
-                  <video class="img-fluid pb-3" loop autoplay muted controls>
-                    <source src="videos/demo_video.mp4" />
-                </video>
-
-                    <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        var video = document.getElementById('myVideo');
-    
-                        function isMobileDevice() {
-                            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-                        };
-    
-                        if (!isMobileDevice()) {
-                            setTimeout(function() {
-                                video.setAttribute('controls', '');
-                            }, 1500); // 2000 milliseconds = 2 seconds
-                        } else {
-                            video.setAttribute('controls', '');
-                        }
-                    });
-                    </script>
-                </div>
-            </div>
             <div class="row justify-content-center mb-3">
                 <div class="col-12">
                     <h2><span class="racing-sans-one-regular" style="font-weight: bold; font-size: 2em;">
@@ -318,19 +291,6 @@
           </div>
         </div>
     
-        <div class="video-background">
-            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-                <source src="vis/teaser.mp4" type="video/mp4">
-            </video>
-            <div class="video-overlay"></div>
-            <div class="flex-center-container"> 
-                <div class="content">
-                    <h1>We generate Hyper-Immersive Panoramic Video</h1>
-                    <h3>from a single perspective anchor</h3>
-                </div>
-            </div>
-        </div>
-    
     </div>
 
 
@@ -369,15 +329,14 @@
                         <b>Abstract</b>
                     </h1>
                     <p class="text-justify">
-
-                      360° videos offer a hyper-immersive experience that allows the viewers to explore a dynamic scene from full 360 degrees. 
-                      To achieve more user-friendly and personalized content creation in 360° video format, we seek to lift standard perspective videos into 360° equirectangular videos. To this end, we introduce <b>Imagine360</b>, the first perspective-to-360° video generation framework that creates high-quality 360° videos with rich and diverse motion patterns from video-based control.
-                      Imagine360 learns fine-grained spherical visual and motion patterns from limited 360° video data with several key designs. 
-                      <b>1)</b> Firstly we adopt the dual-branch design, including a perspective and a panorama video denoising branch to provide local and global constraints for 360° video generation, with motion module and spatial LoRA layers fine-tuned on extended web 360° videos.
-                      <b>2)</b>Additionally, an antipodal mask is devised to capture long-range motion dependencies, enhancing the reversed camera motion between antipodal pixels across hemispheres.
-                      <b>3)</b> To handle general perspective video inputs, we propose elevation-aware designs that adapt to varying video masking due to changing elevations across frames.
-                      Extensive experiments show Imagine360 achieves superior graphics quality and motion coherence among state-of-the-art 360° video generation methods. We believe Imagine360 holds promise for advancing personalized, immersive 360° video creation.
-
+                      <p style="font-size: 18px; line-height: 1.3; text-align: justify; color: black;">
+                        The rapid advancement of diffusion models holds the promise of revolutionizing the application of VR and AR technologies, which typically require scene-level 4D assets for user experience. 
+                        Nonetheless, existing diffusion models predominantly concentrate on modeling static 3D scenes or object-level dynamics, constraining their capacity to provide truly immersive experiences. background
+                        To address this issue, we propose <b>HoloTime</b>, a framework that integrates video diffusion models to generate panoramic videos from a single prompt or reference image, along with a 360-degree 4D scene reconstruction method that seamlessly transforms the generated panoramic video into 4D assets, enabling a fully immersive 4D experience for users.
+                        Specifically, to tame video diffusion models for generating high-fidelity panoramic videos, we introduce the <b>360World dataset</b>, the first comprehensive collection of panoramic videos suitable for downstream 4D scene reconstruction tasks.
+                        With this curated dataset, we propose <b>Panoramic Animator</b>, a two-stage image-to-video diffusion model that can convert panoramic images into high-quality panoramic videos. Following this, we present <b>Panoramic Space-Time Reconstruction</b>, which leverages a space-time depth estimation method to transform the generated panoramic videos into 4D point clouds, enabling the optimization of a holistic 4D Gaussian Splatting representation to reconstruct spatially and temporally consistent 4D scenes.
+                        To validate the efficacy of our method, we conducted a comparative analysis with existing approaches, revealing its superiority in both panoramic video generation and 4D scene reconstruction. This demonstrates our method's capability to create more engaging and realistic immersive environments, thereby enhancing user experiences in VR and AR applications.
+                      </p>
                     </p>
                 </div>
 
