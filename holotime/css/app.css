@@ -241,7 +241,7 @@ span.highlight {
 
 .switch input {display:none;}
 
-.slider {
+/*.slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -280,10 +280,10 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(32px);
-}
+}*/
 
 /*------ ADDED CSS ---------*/
-.slider:after
+/*.slider:after
 {
  content:'';
  color: black;
@@ -300,7 +300,7 @@ input:checked + .slider:after
 {  
   content:'';
   transform: translate(80%,-50%);
-}
+}*/
 
 /*--------- END --------*/
 
