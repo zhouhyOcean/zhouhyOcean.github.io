@@ -494,173 +494,23 @@
       </div>
     </section>
 
-
-
-    <div class="container-fluid">
-      <div class="row py-5  bg-dark">
-          <div class="col-2"></div>
-          <div class="col-md-8">
-              <h1 class="text-center pb-3 text-white">
-                <b>Gallery <span class="small-text">(click below pano videos to open VR mode)</span></b>
-
-              </h1>
-              <p class="text-center small-text" style="color: red; font-weight: bold;"> 
-                We highly recommend using a mobile phone to access the website(better use Chrome browser) for device motion tracking, enhancing the immersive quality of the VR interactive experience.             </p>
-              </p>
-              
-              <p class="text-center small-text" style="color: yellow; font-weight: bold;"> 
-                NOTE: The Loading may be a little slow, but your wait will be worth it !!!           </p>
-              </p>
-
-              <script>
-                  activeMethodPill = "zipnerf"
-                  activeScenePill = document.querySelector('.scene-pill.active-pill');
-                  activeModePill = document.querySelector('.mode-pill.active-pill');
-              </script>
-              
-              <div class="text-center">
-                  <div class="video-container">
-
-                    <div class="video">
-                      <video class="video" style="width: 100%; max-width: 100%;" id="compVideo0" loop playsinline autoplay muted>
-                          <source data-src="videos/results/PANO VIDEO/a city street covered in snow with cherry blossom trees lining the sidewalks.mp4">
-                      </video>
-                  </div>
-
-
-                  
-                  <video class="video" style="width: 100%; max-width: 100%; display: none;" id="compVideo1" loop playsinline autoplay muted>
-                      <source src="videos/results/INPUT VIDEO/a city street covered in snow with cherry blossom trees lining the sidewalks.mp4" />
-                  </video>
-
-
-
-                  </div>
-                  <div class="text-center" style="color: black;" id="mode-pills">
-                      <div class="btn-group btn-group-sm">
-
-                          <span class="btn btn-primary mode-pill active" data-value="PANO VIDEO"
-                              onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                              PANO VIDEO
-                          </span>
-
-                          <span class="btn btn-primary mode-pill active" data-value="INPUT VIDEO"
-                              onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                              INPUT VIDEO
-                          </span>
-
-
-                      </div>
-                  </div>
-
-
-                  <br>
-                  <p class="text-justify text-white" style="text-align: center;" id="prompt-box">a city street covered in snow with cherry blossom trees lining the sidewalks. </p>
-                  <script>
-                          const video0 = document.getElementById("compVideo0");
-                          const video1 = document.getElementById("compVideo1");
-
-                          function switchVideo(activeVidID) {
-                              if (activeVidID === 0) {
-                                  video0.classList.add("active"); 
-                                  video1.classList.remove("active"); 
-                                  video0.play();
-                                  video1.pause();
-                              } else if (activeVidID === 1) {
-                                  video1.classList.add("active"); 
-                                  video0.classList.remove("active"); 
-                                  video1.play();
-                                  video0.pause();
-                              }
-                          }
-
-                          document.querySelector("button#switchToVideo0").addEventListener("click", () => {
-                              switchVideo(0); 
-                          });
-
-                          document.querySelector("button#switchToVideo1").addEventListener("click", () => {
-                              switchVideo(1); 
-                          });
-                  </script>
-
-
-                  <div class="pill-row scene-pills" id="scene-pills">
-
-                      <span class="pill scene-pill active" data-value="a city street covered in snow with cherry blossom trees lining the sidewalks" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                          <img class="thumbnail-img" src="videos/results/inputs/a city street covered in snow with cherry blossom trees lining the sidewalks.png" alt="a city street covered in snow with cherry blossom trees lining the sidewalks" width="64">
-                      </span>
-
-                      <span class="pill scene-pill" data-value="a group of three animals walking down a dirt road" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                        <img class="thumbnail-img" src="videos/results/inputs/a group of three animals walking down a dirt road.png" alt="a group of three animals walking down a dirt road" width="64">
-                    </span>
-
-                    <span class="pill scene-pill" data-value="a river with rough waters and rapids, with a rocky mountain in the background" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                      <img class="thumbnail-img" src="videos/results/inputs/a river with rough waters and rapids, with a rocky mountain in the background.png" alt="a river with rough waters and rapids, with a rocky mountain in the background" width="64">
-                  </span>
-
-
-                      <span class="pill scene-pill" data-value="a white SUV driving down a dirt road in a forested mountain valley" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                        <img class="thumbnail-img" src="videos/results/inputs/a white SUV driving down a dirt road in a forested mountain valley.png" alt="a white SUV driving down a dirt road in a forested mountain valley" width="64">
-                    </span>
-
-                    <span class="pill scene-pill" data-value="a serene pond filled with colorful koi fish" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                      <img class="thumbnail-img" src="videos/results/inputs/a serene pond filled with colorful koi fish.png" alt="a serene pond filled with colorful koi fish" width="64">
-                  </span>
-
-                    <span class="pill scene-pill" data-value="Stonehenge in Wiltshire, England, under the green Northern Lights" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                      <img class="thumbnail-img" src="videos/results/inputs/Stonehenge in Wiltshire, England, under the green Northern Lights.png" alt="Stonehenge in Wiltshire, England, under the green Northern Lights" width="64">
-                  </span>
-
-                  <span class="pill scene-pill" data-value="a rocky coastline with a lighthouse standing on a cliff" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                    <img class="thumbnail-img" src="videos/results/inputs/a rocky coastline with a lighthouse standing on a cliff.png" alt="a rocky coastline with a lighthouse standing on a cliff" width="64">
-                </span>
-
-                      <span class="pill scene-pill" data-value="a cute golden retriever wearing sunglasses and running outside in the rain" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                          <img class="thumbnail-img" src="videos/results/inputs/a cute golden retriever wearing sunglasses and running outside in the rain.png" alt="a cute golden retriever wearing sunglasses and running outside in the rain" width="64">
-                      </span>
-
-                      <span class="pill scene-pill" data-value="a large glass display case filled with various electronic devices" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                          <img class="thumbnail-img" src="videos/results/inputs/a large glass display case filled with various electronic devices.png" alt="a large glass display case filled with various electronic devices" width="64">
-                      </span>
-
-                      <span class="pill scene-pill" data-value="a lighthouse on a cliff overlooking the ocean" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                          <img class="thumbnail-img" src="videos/results/inputs/a lighthouse on a cliff overlooking the ocean.png" alt="a lighthouse on a cliff overlooking the ocean" width="64">
-                      </span>
-
-                      <span class="pill scene-pill" data-value="a man standing on a hill overlooking a stunning mountain lake" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                          <img class="thumbnail-img" src="videos/results/inputs/a man standing on a hill overlooking a stunning mountain lake.png" alt="a man standing on a hill overlooking a stunning mountain lake" width="64">
-                      </span>
-
-                      <span class="pill scene-pill" data-value="a red gondola lift in a mountainous region, with a beautiful sunset in the background" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                          <img class="thumbnail-img" src="videos/results/inputs/a red gondola lift in a mountainous region, with a beautiful sunset in the background.png" alt="a red gondola lift in a mountainous region, with a beautiful sunset in the background" width="64">
-                      </span>
-
-                      <span class="pill scene-pill" data-value="a red car driving down a country road with a grassy field on the side" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                          <img class="thumbnail-img" src="videos/results/inputs/a red car driving down a country road with a grassy field on the side.png" alt="a red car driving down a country road with a grassy field on the side" width="64">
-                      </span>
-
-                      <span class="pill scene-pill" data-value="a robot standing in a desolate, futuristic city" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                          <img class="thumbnail-img" src="videos/results/inputs/a robot standing in a desolate, futuristic city.png" alt="a robot standing in a desolate, futuristic city" width="64">
-                      </span>
-
-                      <span class="pill scene-pill" data-value="a serene snowy landscape with a still lake surrounded by snow-covered trees and mountains in the background" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                          <img class="thumbnail-img" src="videos/results/inputs/a serene snowy landscape with a still lake surrounded by snow-covered trees and mountains in the background.png" alt="a serene snowy landscape with a still lake surrounded by snow-covered trees and mountains in the background" width="64">
-                      </span>
-
-
-                  </div>
-
-                  <script>
-                      activeMethodPill = document.querySelector('.method-pill.active-pill');
-                      activeScenePill = document.querySelector('.scene-pill.active-pill');
-                      activeModePill = document.querySelector('.mode-pill.active-pill');
-                  </script>
-              </div>
-
+  
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!--/ Abstract. -->
+        <div class="columns is-mobile is-centered">
+          <div class="column is-one-third-desktop is-half-mobile">
+            <!-- 左侧图片 -->
+            <figure class="image is-4by3">
+              <img src="vis/logo_text.png" alt="Camera Trajectory">
+            </figure>
           </div>
-          <div class="col-2"></div>
+          <div class="column is-two-thirds-desktop is-half-mobile">
+              <video class="video" loop playsinline autoplay muted src="vis/teaser.mp4"></video>
+          </div>
+        </div>
       </div>
-  </div>
+    </section>
 
 
   <div class="container-fluid px-5">
