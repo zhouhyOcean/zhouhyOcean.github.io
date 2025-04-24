@@ -6,7 +6,7 @@
 }
 
 /* Desktop-specific styles */
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   /* Hide mobile section */
   .mobile-content {
       display: none;
@@ -18,7 +18,7 @@
 }
 
 /* Mobile-specific styles */
-@media (max-width: 767px) {
+@media (max-width: 1000px) {
   /* Show mobile section */
   .mobile-content {
       display: block;
@@ -241,7 +241,7 @@ span.highlight {
 
 .switch input {display:none;}
 
-.slider {
+/*.slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -280,10 +280,10 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(32px);
-}
+}*/
 
 /*------ ADDED CSS ---------*/
-.slider:after
+/*.slider:after
 {
  content:'';
  color: black;
@@ -300,7 +300,7 @@ input:checked + .slider:after
 {  
   content:'';
   transform: translate(80%,-50%);
-}
+}*/
 
 /*--------- END --------*/
 
@@ -488,7 +488,7 @@ html, body {
 .video-background {
   position: relative;
   width: 100%;
-  padding-top: 63.21%; /* Aspect ratio */
+  padding-top: 50%; /* Aspect ratio */
   overflow: hidden;
 }
 
